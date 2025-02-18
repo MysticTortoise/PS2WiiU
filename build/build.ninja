@@ -49,17 +49,27 @@ cmake_ninja_workdir = D$:/Programming/PS2WiiU/build/
 
 build cmake_object_order_depends_target_CrossShift2: phony || cmake_object_order_depends_target_glad cmake_object_order_depends_target_glfw
 
+build CMakeFiles/CrossShift2.dir/source/Game/TeaPacket/Video.cpp.obj: CXX_COMPILER__CrossShift2_unscanned_Release D$:/Programming/PS2WiiU/source/Game/TeaPacket/Video.cpp || cmake_object_order_depends_target_CrossShift2
+  DEFINES = -DTP_DEBUG -DTP_WIN
+  DEP_FILE = CMakeFiles\CrossShift2.dir\source\Game\TeaPacket\Video.cpp.obj.d
+  FLAGS = -O3 -DNDEBUG -Wall
+  INCLUDES = -ID:/Programming/PS2WiiU/include -ID:/Programming/PS2WiiU/build/_deps/glad-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include
+  OBJECT_DIR = CMakeFiles\CrossShift2.dir
+  OBJECT_FILE_DIR = CMakeFiles\CrossShift2.dir\source\Game\TeaPacket
+
 build CMakeFiles/CrossShift2.dir/source/TeaPacket/Platform/Windows/TeaPacket.cpp.obj: CXX_COMPILER__CrossShift2_unscanned_Release D$:/Programming/PS2WiiU/source/TeaPacket/Platform/Windows/TeaPacket.cpp || cmake_object_order_depends_target_CrossShift2
+  DEFINES = -DTP_DEBUG -DTP_WIN
   DEP_FILE = CMakeFiles\CrossShift2.dir\source\TeaPacket\Platform\Windows\TeaPacket.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -Wall
-  INCLUDES = -ID:/Programming/PS2WiiU/./include -ID:/Programming/PS2WiiU/build/_deps/glad-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include
+  INCLUDES = -ID:/Programming/PS2WiiU/include -ID:/Programming/PS2WiiU/build/_deps/glad-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include
   OBJECT_DIR = CMakeFiles\CrossShift2.dir
   OBJECT_FILE_DIR = CMakeFiles\CrossShift2.dir\source\TeaPacket\Platform\Windows
 
 build CMakeFiles/CrossShift2.dir/source/main.cpp.obj: CXX_COMPILER__CrossShift2_unscanned_Release D$:/Programming/PS2WiiU/source/main.cpp || cmake_object_order_depends_target_CrossShift2
+  DEFINES = -DTP_DEBUG -DTP_WIN
   DEP_FILE = CMakeFiles\CrossShift2.dir\source\main.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -Wall
-  INCLUDES = -ID:/Programming/PS2WiiU/./include -ID:/Programming/PS2WiiU/build/_deps/glad-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include
+  INCLUDES = -ID:/Programming/PS2WiiU/include -ID:/Programming/PS2WiiU/build/_deps/glad-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include
   OBJECT_DIR = CMakeFiles\CrossShift2.dir
   OBJECT_FILE_DIR = CMakeFiles\CrossShift2.dir\source
 
@@ -71,7 +81,7 @@ build CMakeFiles/CrossShift2.dir/source/main.cpp.obj: CXX_COMPILER__CrossShift2_
 #############################################
 # Link the executable CrossShift2.exe
 
-build CrossShift2.exe: CXX_EXECUTABLE_LINKER__CrossShift2_Release CMakeFiles/CrossShift2.dir/source/TeaPacket/Platform/Windows/TeaPacket.cpp.obj CMakeFiles/CrossShift2.dir/source/main.cpp.obj | _deps/glad-build/libglad.a _deps/glfw-build/src/libglfw3.a || _deps/glad-build/libglad.a _deps/glfw-build/src/libglfw3.a
+build CrossShift2.exe: CXX_EXECUTABLE_LINKER__CrossShift2_Release CMakeFiles/CrossShift2.dir/source/Game/TeaPacket/Video.cpp.obj CMakeFiles/CrossShift2.dir/source/TeaPacket/Platform/Windows/TeaPacket.cpp.obj CMakeFiles/CrossShift2.dir/source/main.cpp.obj | _deps/glad-build/libglad.a _deps/glfw-build/src/libglfw3.a || _deps/glad-build/libglad.a _deps/glfw-build/src/libglfw3.a
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = _deps/glad-build/libglad.a  _deps/glfw-build/src/libglfw3.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\CrossShift2.dir
@@ -244,7 +254,7 @@ build _deps/glfw-build/CMakeFiles/uninstall | ${cmake_ninja_workdir}_deps/glfw-b
 build cmake_object_order_depends_target_glfw: phony || .
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/context.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\context.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -252,7 +262,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/context.c.obj: C_COMPILER__glfw_u
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/init.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/init.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\init.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -260,7 +270,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/init.c.obj: C_COMPILER__glfw_unsc
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/input.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/input.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\input.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -268,7 +278,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/input.c.obj: C_COMPILER__glfw_uns
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/monitor.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/monitor.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\monitor.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -276,7 +286,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/monitor.c.obj: C_COMPILER__glfw_u
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/platform.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/platform.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\platform.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -284,7 +294,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/platform.c.obj: C_COMPILER__glfw_
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/vulkan.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/vulkan.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\vulkan.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -292,7 +302,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/vulkan.c.obj: C_COMPILER__glfw_un
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/window.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/window.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\window.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -300,7 +310,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/window.c.obj: C_COMPILER__glfw_un
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/egl_context.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/egl_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\egl_context.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -308,7 +318,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/egl_context.c.obj: C_COMPILER__gl
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/osmesa_context.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/osmesa_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\osmesa_context.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -316,7 +326,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/osmesa_context.c.obj: C_COMPILER_
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_init.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/null_init.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\null_init.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -324,7 +334,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_init.c.obj: C_COMPILER__glfw
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_monitor.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/null_monitor.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\null_monitor.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -332,7 +342,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_monitor.c.obj: C_COMPILER__g
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_window.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/null_window.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\null_window.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -340,7 +350,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_window.c.obj: C_COMPILER__gl
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_joystick.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/null_joystick.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\null_joystick.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -348,7 +358,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/null_joystick.c.obj: C_COMPILER__
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_module.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_module.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_module.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -356,7 +366,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_module.c.obj: C_COMPILER__g
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_time.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_time.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_time.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -364,7 +374,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_time.c.obj: C_COMPILER__glf
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_thread.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_thread.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_thread.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -372,7 +382,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_thread.c.obj: C_COMPILER__g
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_init.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_init.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_init.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -380,7 +390,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_init.c.obj: C_COMPILER__glf
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_joystick.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_joystick.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_joystick.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -388,7 +398,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_joystick.c.obj: C_COMPILER_
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_monitor.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_monitor.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_monitor.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -396,7 +406,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_monitor.c.obj: C_COMPILER__
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_window.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/win32_window.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\win32_window.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -404,7 +414,7 @@ build _deps/glfw-build/src/CMakeFiles/glfw.dir/win32_window.c.obj: C_COMPILER__g
   OBJECT_FILE_DIR = _deps\glfw-build\src\CMakeFiles\glfw.dir
 
 build _deps/glfw-build/src/CMakeFiles/glfw.dir/wgl_context.c.obj: C_COMPILER__glfw_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glfw-src/src/wgl_context.c || cmake_object_order_depends_target_glfw
-  DEFINES = -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
+  DEFINES = -DTP_DEBUG -DUNICODE -DWINVER=0x0501 -D_GLFW_WIN32 -D_UNICODE
   DEP_FILE = _deps\glfw-build\src\CMakeFiles\glfw.dir\wgl_context.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=c99 -Wall
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glfw-src/include -ID:/Programming/PS2WiiU/build/_deps/glfw-src/src -ID:/Programming/PS2WiiU/build/_deps/glfw-build/src
@@ -521,6 +531,7 @@ build _deps/glfw-build/src/CMakeFiles/update_mappings | ${cmake_ninja_workdir}_d
 build cmake_object_order_depends_target_glad: phony || .
 
 build _deps/glad-build/CMakeFiles/glad.dir/sources/glad.c.obj: C_COMPILER__glad_unscanned_Release D$:/Programming/PS2WiiU/build/_deps/glad-src/sources/glad.c || cmake_object_order_depends_target_glad
+  DEFINES = -DTP_DEBUG
   DEP_FILE = _deps\glad-build\CMakeFiles\glad.dir\sources\glad.c.obj.d
   FLAGS = -O3 -DNDEBUG -std=gnu99
   INCLUDES = -ID:/Programming/PS2WiiU/build/_deps/glad-src/include

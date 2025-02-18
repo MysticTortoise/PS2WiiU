@@ -12,7 +12,8 @@
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
-                "TP_WIN"
+                "TP_WIN",
+                "TP_DEBUG"
             ],
             "windowsSdkVersion": "10.0.22000.0",
             "compilerPath": "cl.exe",

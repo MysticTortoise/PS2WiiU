@@ -1,7 +1,9 @@
 cmake_minimum_required(VERSION 3.10)
 project(CrossShift2 CXX)
 
-
+if(DEBUG)
+   add_compile_definitions(TP_DEBUG)
+endif(DEBUG)
 
 if(PLATFORM_WINDOWS)
    # Fetch GLFW and GLAD
@@ -15,21 +17,21 @@ if(PLATFORM_WINDOWS)
    set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
    FetchContent_MakeAvailable(glfw)
    FetchContent_MakeAvailable(glad)
+
+   add_compile_definitions(TP_WIN)
 endif(PLATFORM_WINDOWS)
 
 if(PLATFORM_WIIU)
    set(CMAKE_TOOLCHAIN_FILE /opt/devkitpro/cmake/WiiU.cmake)
 endif(PLATFORM_WIIU)
 
-set(includeDirectories ./include)
-
 file(GLOB_RECURSE sources source/*.cpp source/*.c)
-file(GLOB_RECURSE includes ${includeDirectories} *.h *.hpp)
+file(GLOB_RECURSE includes include/*.h include/*.hpp)
 
 add_executable(CrossShift2
    ${sources} ${includes})
 
-target_include_directories(CrossShift2 PRIVATE ${includeDirectories})
+target_include_directories(CrossShift2 PRIVATE include)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 

@@ -317,6 +317,9 @@ CrossShift2_IS_TOP_LEVEL:STATIC=ON
 //Value Computed by CMake
 CrossShift2_SOURCE_DIR:STATIC=D:/Programming/PS2WiiU
 
+//No help, variable specified on the command line.
+DEBUG:UNINITIALIZED=true
+
 //Directory under which to collect all populated content
 FETCHCONTENT_BASE_DIR:PATH=D:/Programming/PS2WiiU/build/_deps
 
