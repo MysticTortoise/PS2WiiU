@@ -2,8 +2,7 @@
 
 int main()
 {
-    int result = TeaPacket::Initialize();
-    if (result == 1)
+    if (TeaPacket::Initialize() == 1)
     {
         while (TeaPacket::ShouldRun())
         {
