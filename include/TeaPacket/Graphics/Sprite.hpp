@@ -2,18 +2,20 @@
 
 #include "TeaPacket/Graphics/Texture.hpp"
 #include "TeaPacket/Graphics/Shader.hpp"
+#include "TeaPacket/Math/Vector2.hpp"
+#include "TeaPacket/Math/Vector4.hpp"
 
 namespace TeaPacket::Graphics
 {
     class Sprite
     {
     public:
-        float x;
-        float y;
-        float xScale;
-        float yScale;
-        float angle;
-        
+        TeaPacket::Math::Vector2 position = TeaPacket::Math::Vector2(0,0);
+        TeaPacket::Math::Vector2 scale = TeaPacket::Math::Vector2(1,1);
+        float angle = 0;
+
+        TeaPacket::Math::Vector4 color;
+
         
         Texture* texture;
 

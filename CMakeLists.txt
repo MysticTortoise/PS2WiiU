@@ -33,7 +33,7 @@ endif(PLATFORM_WINDOWS)
 
 if(PLATFORM_WIIU)
    wut_create_rpx(CrossShift2)
+   install(FILES "${CMAKE_CURRENT_BINARY_DIR}/crossshift2.rpx"
+        DESTINATION "${CMAKE_INSTALL_PREFIX}")
 endif(PLATFORM_WIIU)
 
-install(FILES "${CMAKE_CURRENT_BINARY_DIR}/crossshift2.rpx"
-        DESTINATION "${CMAKE_INSTALL_PREFIX}")

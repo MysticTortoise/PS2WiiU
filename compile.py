@@ -25,4 +25,3 @@ for arg in compileDefines:
 
 os.system("cmake -S. -Bbuild " + stringargs)
 os.system("cmake --build build")
-

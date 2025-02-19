@@ -46,19 +46,13 @@ void FSInit(){
 }
 
 int TeaPacket::Initialize(){
-    PRINT("FIrst init");
     if(GraphicsInit() == -1) { return -1; }
     FSInit();
-    PRINT("Done base init!");
     
     Graphics::Sprite::SpriteRendererInit();
-    PRINT("SPRITE RENDER INIT");
 
     Graphics::Texture* tex = new Graphics::Texture("test.png");
-    PRINT("TEXTURE INIT");
     sprite = Graphics::Sprite(tex);
-    PRINT("SPRITE INIT!");
-    PRINT("Done init!");
 
     return 1;
 }
@@ -70,7 +64,8 @@ bool TeaPacket::ShouldRun(){
 void TeaPacket::Delay(){}
 
 void TeaPacket::Update(){
-    PRINT("FIrst update!");
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
     sprite.Draw();
     glfwSwapBuffers(window);
     glfwPollEvents();

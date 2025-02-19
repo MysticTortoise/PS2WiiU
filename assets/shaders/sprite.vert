@@ -9,9 +9,9 @@ layout(binding = 0, std140) uniform uTransformData
     float uf_rot; //  4   8
     vec2 uf_scale; // 8   12
 };
-layout(binding = 1) uniform uColorData{
+layout(binding = 1, std140) uniform uColorData{
     vec4 uf_color; // 16  0
-}
+};
 
 layout(location = 0) out vec2 TexCoord;
 layout(location = 1) out vec4 Color;
