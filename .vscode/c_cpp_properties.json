@@ -6,7 +6,8 @@
                 "${workspaceFolder}/**",
                 "C:/devkitPro/wut/include/**",
                 "C:/devkitPro/portlibs/**",
-                "${workspaceFolder}/include"
+                "${workspaceFolder}/include",
+                "${workspaceFolder}/libraries/Windows/GLFW/include"
             ],
             "defines": [
                 "_DEBUG",
@@ -19,7 +20,7 @@
             "compilerPath": "cl.exe",
             "cStandard": "c17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "windows-msvc-x64"
+            "intelliSenseMode": "windows-msvc-x64",
         }
     ],
     "version": 4

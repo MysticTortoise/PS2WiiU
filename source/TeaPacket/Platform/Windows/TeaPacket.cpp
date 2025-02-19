@@ -7,16 +7,22 @@
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
 
+#include <filesystem>
+#include "TeaPacket/Graphics/Sprite.hpp"
+#include "TeaPacket/Graphics/Texture.hpp"
+
 using namespace TeaPacket;
 
 GLFWwindow* window = nullptr;
 
-int TeaPacket::Initialize(){
+Graphics::Sprite sprite;
+
+int GraphicsInit(){
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
+
     window = glfwCreateWindow(TeaPacket::resolutionWidth, TeaPacket::resolutionHeight, windowTitle, NULL, NULL);
     if(window == NULL){
         ERROR("Failed to create window!");
@@ -31,6 +37,31 @@ int TeaPacket::Initialize(){
     }
     return 1;
 }
+void FSInit(){
+    #ifdef TP_DEBUG
+        std::filesystem::current_path(std::filesystem::current_path().parent_path().append("assets"));
+    #else
+        std::filesystem::current_path(std::filesystem::current_path().append("assets"));
+    #endif
+}
+
+int TeaPacket::Initialize(){
+    PRINT("FIrst init");
+    if(GraphicsInit() == -1) { return -1; }
+    FSInit();
+    PRINT("Done base init!");
+    
+    Graphics::Sprite::SpriteRendererInit();
+    PRINT("SPRITE RENDER INIT");
+
+    Graphics::Texture* tex = new Graphics::Texture("test.png");
+    PRINT("TEXTURE INIT");
+    sprite = Graphics::Sprite(tex);
+    PRINT("SPRITE INIT!");
+    PRINT("Done init!");
+
+    return 1;
+}
 
 bool TeaPacket::ShouldRun(){
     return !glfwWindowShouldClose(window);
@@ -39,11 +70,16 @@ bool TeaPacket::ShouldRun(){
 void TeaPacket::Delay(){}
 
 void TeaPacket::Update(){
+    PRINT("FIrst update!");
+    sprite.Draw();
+    glfwSwapBuffers(window);
     glfwPollEvents();
 }
 
 void TeaPacket::DeInitialize(){
     glfwTerminate();
+
+    Graphics::Sprite::SpriteRendererDeInit();
 }
 
 

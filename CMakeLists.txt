@@ -1,22 +1,14 @@
-cmake_minimum_required(VERSION 3.10)
-project(CrossShift2 CXX)
+cmake_minimum_required(VERSION 3.24)
+project(CrossShift2 CXX C)
 
 if(DEBUG)
    add_compile_definitions(TP_DEBUG)
 endif(DEBUG)
 
 if(PLATFORM_WINDOWS)
-   # Fetch GLFW and GLAD
-
-   include(FetchContent)
-   FetchContent_Declare(glfw GIT_REPOSITORY https://github.com/glfw/glfw.git GIT_TAG master)
-   FetchContent_Declare(glad GIT_REPOSITORY https://github.com/SasLuca/MyGlad.git GIT_TAG master)
-
-   set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
-   set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
-   set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
-   FetchContent_MakeAvailable(glfw)
-   FetchContent_MakeAvailable(glad)
+   add_subdirectory(libraries/Windows/GLFW/)
+   include_directories(SYSTEM "libraries/Windows/GLAD/include")
+   set(libsources "libraries/Windows/GLAD/src/glad.c")
 
    add_compile_definitions(TP_WIN)
 endif(PLATFORM_WINDOWS)
@@ -29,14 +21,14 @@ file(GLOB_RECURSE sources source/*.cpp source/*.c)
 file(GLOB_RECURSE includes include/*.h include/*.hpp)
 
 add_executable(CrossShift2
-   ${sources} ${includes})
+   ${sources} ${includes} ${libsources})
 
 target_include_directories(CrossShift2 PRIVATE include)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 
 if(PLATFORM_WINDOWS)
-   target_link_libraries(CrossShift2 glad glfw)
+   target_link_libraries(CrossShift2 glfw)
 endif(PLATFORM_WINDOWS)
 
 if(PLATFORM_WIIU)
