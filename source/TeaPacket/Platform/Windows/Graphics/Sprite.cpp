@@ -83,13 +83,13 @@ void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
 
 void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
     cameraMatrix = glm::mat4(1.0f);
-    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(-1,-1, 0));
     cameraMatrix = glm::scale(cameraMatrix, glm::vec3(2.0f/renderWidthScale, 2.0f/renderHeightScale, 0));
-    cameraMatrix = glm::rotate(cameraMatrix, glm::radians(-camera->angle), glm::vec3(0,0,1));
+    cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camera->angle), glm::vec3(0,0,1));
+    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(renderWidthScale * -0.5f, renderHeightScale * -0.5f, 0));
     cameraMatrix = glm::translate(cameraMatrix, glm::vec3(-camera->position.x/2,-camera->position.y/2,0));
     cameraMatrix = glm::scale(cameraMatrix, glm::vec3(1/camera->scale.x,1/camera->scale.y,0));
 
-    camera->angle++;
+    camera->position.x++;
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
