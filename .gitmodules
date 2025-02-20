@@ -1,0 +1,3 @@
+[submodule "libraries/windows/glfw"]
+	path = libraries/windows/glfw
+	url = https://github.com/glfw/glfw.git
