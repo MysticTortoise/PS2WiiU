@@ -6,9 +6,10 @@ if(DEBUG)
 endif(DEBUG)
 
 if(PLATFORM_WINDOWS)
-   add_subdirectory(libraries/Windows/glfw/)
-   include_directories(SYSTEM "libraries/Windows/GLAD/include")
-   set(libsources "libraries/Windows/GLAD/src/glad.c")
+   add_subdirectory(libraries/windows/glfw/)
+   add_subdirectory(libraries/windows/glm/)
+   include_directories(SYSTEM "libraries/windows/GLAD/include")
+   set(libsources "libraries/windows/GLAD/src/glad.c")
 
    add_compile_definitions(TP_WIN)
 endif(PLATFORM_WINDOWS)
@@ -28,7 +29,7 @@ target_include_directories(CrossShift2 PRIVATE include)
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 
 if(PLATFORM_WINDOWS)
-   target_link_libraries(CrossShift2 glfw)
+   target_link_libraries(CrossShift2 glfw glm)
 endif(PLATFORM_WINDOWS)
 
 if(PLATFORM_WIIU)
