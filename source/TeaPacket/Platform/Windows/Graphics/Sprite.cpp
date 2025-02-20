@@ -89,7 +89,6 @@ void TeaPacket::Graphics::Sprite::Draw(){
         (scale.x * (texture->width / renderWidthScale)), 
         (scale.y * (texture->height / renderHeightScale))
     );
-    PRINT(scaledSize.x);
 
     glBufferSubData(GL_UNIFORM_BUFFER, 0,  8, &scaledPos);
     glBufferSubData(GL_UNIFORM_BUFFER, 8,  4, &angle);

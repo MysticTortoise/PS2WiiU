@@ -11,7 +11,7 @@ namespace TeaPacket::Scene{
         virtual void Draw();
         virtual void Stop();
         virtual void Deload();
-    }
+    };
 
     template <class T> T* LoadScene();
     std::vector<SceneScript*> readiedScenes = std::vector<SceneScript*>();

@@ -38,11 +38,7 @@ int GraphicsInit(){
     return 1;
 }
 void FSInit(){
-    #ifdef TP_DEBUG
-        std::filesystem::current_path(std::filesystem::current_path().parent_path().append("assets"));
-    #else
-        std::filesystem::current_path(std::filesystem::current_path().append("assets"));
-    #endif
+    std::filesystem::current_path(std::filesystem::current_path().append("assets"));
 }
 
 int TeaPacket::Initialize(){

@@ -22,6 +22,9 @@ void main()
 
     // I really should use matrices but.. honestly i dont want to bug the poor people of FTU anymore so this will do for now.
 
+    // Scale
+    transformedPos *= uf_scale;
+
     // Rotate
     float s = sin(uf_rot);
     float c = cos(uf_rot);
@@ -29,10 +32,7 @@ void main()
     transformedPos.y = transformedPos.x * s + transformedPos.y * c;
 
     // Transform
-    transformedPos += uf_pos;
-
-    // Scale
-    transformedPos *= uf_scale;
+    transformedPos += vec2(uf_pos.x, -uf_pos.y);
 
     TexCoord = aTexCoord;
     gl_Position = vec4(transformedPos.x, transformedPos.y, 0.0f, 1.0f);

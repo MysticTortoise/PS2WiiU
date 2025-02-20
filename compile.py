@@ -1,6 +1,9 @@
 import argparse
 import os
+import subprocess
 
+
+os.system("cls")
 parser = argparse.ArgumentParser()
 parser.add_argument("platform", help="The platform you want to build for")
 parser.add_argument("-ts", "--twoscreen", help="Enables dual screen mode. Only works on some platforms.", action="store_true")
@@ -25,3 +28,4 @@ for arg in compileDefines:
 
 os.system("cmake -S. -Bbuild " + stringargs)
 os.system("cmake --build build")
+subprocess.run("build/CrossShift2.exe")
