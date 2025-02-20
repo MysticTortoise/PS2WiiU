@@ -12,6 +12,9 @@
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
+#include "glm/glm.hpp"
+#include "glm/gtc/type_ptr.hpp"
+#include "glm/gtc/matrix_transform.hpp"
 #include "TeaPacket/DebugMacros.hpp"
 
 const float spriteVertexDataBase[24] = {
@@ -50,7 +53,7 @@ void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
 
     glGenBuffers(1, &spritePosUniformBlock);
     glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
-    glBufferData(GL_UNIFORM_BUFFER, 32, NULL, GL_STATIC_DRAW);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4) * 2, NULL, GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     glBindBufferBase(GL_UNIFORM_BUFFER, 0, spritePosUniformBlock);
@@ -76,27 +79,29 @@ void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
-    position.y = 48;
-    anchor.y = -1;
+    position.x = 1280/2;
+    position.y = 720/2;
+    angle += 1;
+    anchor.y = 0;
 
     glBindTexture(GL_TEXTURE_2D, texture->platformTexture->handle);
     glUseProgram(Sprite::spriteShader->platformShader->handle);
 
+    glm::mat4 objectMat(1.0f);
+    glm::vec3 anchorOffset(anchor.x, -anchor.y, 0);
+    glm::vec3 pixelSize(texture->width, texture->height, 0);
+
+    objectMat = glm::translate(objectMat, glm::vec3(-1,-1, 0));
+    objectMat = glm::scale(objectMat, glm::vec3(2.0f/renderWidthScale, 2.0f/renderHeightScale, 0));
+    objectMat = glm::translate(objectMat, ((glm::vec3)position) + anchorOffset * pixelSize);
+    objectMat = glm::scale(objectMat,pixelSize);
+    objectMat = glm::translate(objectMat, -anchorOffset);
+    objectMat = glm::rotate(objectMat, glm::radians(angle), glm::vec3(0,0,1));
+    objectMat = glm::scale(objectMat, glm::vec3(scale.x*0.5f,scale.y*0.5f,0));
+    objectMat = glm::translate(objectMat, anchorOffset);
+
     glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
-
-    Math::Vector2 scaledPos = Math::Vector2(
-        2*(position.x / renderWidthScale) - 1,
-        2*(position.y / renderHeightScale) - 1
-    );
-    Math::Vector2 scaledSize = Math::Vector2(
-        (scale.x * (texture->width / renderWidthScale)), 
-        (scale.y * (texture->height / renderHeightScale))
-    );
-
-    glBufferSubData(GL_UNIFORM_BUFFER, 0,  8, &scaledPos);
-    glBufferSubData(GL_UNIFORM_BUFFER, 8,  8, &anchor);
-    glBufferSubData(GL_UNIFORM_BUFFER, 16, 4, &angle);
-    glBufferSubData(GL_UNIFORM_BUFFER, 24, 8, &scaledSize);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0,  sizeof(glm::mat4), glm::value_ptr(objectMat));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     
     glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);

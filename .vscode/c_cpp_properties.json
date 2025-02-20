@@ -3,11 +3,13 @@
         {
             "name": "Win32",
             "includePath": [
-                "${workspaceFolder}/**",
-                "C:/devkitPro/wut/include/**",
-                "C:/devkitPro/portlibs/**",
+                "${workspaceFolder}",
+                "C:/devkitPro/wut/include",
+                "C:/devkitPro/portlibs",
                 "${workspaceFolder}/include",
-                "${workspaceFolder}/libraries/Windows/GLFW/include"
+                "${workspaceFolder}/libraries/windows/glfw/include",
+                "${workspaceFolder}/libraries/windows/glad/include",
+                "${workspaceFolder}/libraries/windows/glm"
             ],
             "defines": [
                 "_DEBUG",
