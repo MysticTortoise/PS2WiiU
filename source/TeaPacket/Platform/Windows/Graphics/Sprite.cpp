@@ -34,6 +34,8 @@ unsigned int spriteColUniformBlock;
 float renderWidthScale; // render width in units (aka pixels)
 float renderHeightScale;
 
+glm::mat4 cameraMatrix(1.0f);
+
 TeaPacket::Graphics::Shader* TeaPacket::Graphics::Sprite::spriteShader = nullptr;
 
 void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
@@ -78,10 +80,22 @@ void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
     delete Sprite::spriteShader;
 }
 
+
+void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
+    cameraMatrix = glm::mat4(1.0f);
+    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(-1,-1, 0));
+    cameraMatrix = glm::scale(cameraMatrix, glm::vec3(2.0f/renderWidthScale, 2.0f/renderHeightScale, 0));
+    cameraMatrix = glm::rotate(cameraMatrix, glm::radians(-camera->angle), glm::vec3(0,0,1));
+    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(-camera->position.x/2,-camera->position.y/2,0));
+    cameraMatrix = glm::scale(cameraMatrix, glm::vec3(1/camera->scale.x,1/camera->scale.y,0));
+
+    camera->angle++;
+}
+
 void TeaPacket::Graphics::Sprite::Draw(){
     position.x = 1280/2;
     position.y = 720/2;
-    angle += 1;
+    angle = 0;
     anchor.y = 0;
 
     glBindTexture(GL_TEXTURE_2D, texture->platformTexture->handle);
@@ -91,8 +105,6 @@ void TeaPacket::Graphics::Sprite::Draw(){
     glm::vec3 anchorOffset(anchor.x, -anchor.y, 0);
     glm::vec3 pixelSize(texture->width, texture->height, 0);
 
-    objectMat = glm::translate(objectMat, glm::vec3(-1,-1, 0));
-    objectMat = glm::scale(objectMat, glm::vec3(2.0f/renderWidthScale, 2.0f/renderHeightScale, 0));
     objectMat = glm::translate(objectMat, ((glm::vec3)position) + anchorOffset * pixelSize);
     objectMat = glm::scale(objectMat,pixelSize);
     objectMat = glm::translate(objectMat, -anchorOffset);
@@ -102,6 +114,7 @@ void TeaPacket::Graphics::Sprite::Draw(){
 
     glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
     glBufferSubData(GL_UNIFORM_BUFFER, 0,  sizeof(glm::mat4), glm::value_ptr(objectMat));
+    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4),  sizeof(glm::mat4), glm::value_ptr(cameraMatrix));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     
     glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);

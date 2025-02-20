@@ -2,6 +2,7 @@
 
 #include "TeaPacket/Graphics/Texture.hpp"
 #include "TeaPacket/Graphics/Shader.hpp"
+#include "TeaPacket/Graphics/Camera.hpp"
 #include "TeaPacket/Math/Vector2.hpp"
 #include "TeaPacket/Math/Vector4.hpp"
 
@@ -27,5 +28,6 @@ namespace TeaPacket::Graphics
         
         static void SpriteRendererInit();
         static void SpriteRendererDeInit();
+        static void BeginRenderFromCamera(Camera* camera);
     };
 }

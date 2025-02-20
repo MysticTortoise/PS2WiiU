@@ -10,6 +10,7 @@
 #include <filesystem>
 #include "TeaPacket/Graphics/Sprite.hpp"
 #include "TeaPacket/Graphics/Texture.hpp"
+#include "TeaPacket/Graphics/Camera.hpp"
 
 using namespace TeaPacket;
 
@@ -59,9 +60,12 @@ bool TeaPacket::ShouldRun(){
 
 void TeaPacket::Delay(){}
 
+TeaPacket::Graphics::Camera mainCamera;
+
 void TeaPacket::Update(){
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+    Graphics::Sprite::BeginRenderFromCamera(&mainCamera);
     sprite.Draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
