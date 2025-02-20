@@ -76,13 +76,16 @@ void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
+    position.y = 48;
+    anchor.y = -1;
+
     glBindTexture(GL_TEXTURE_2D, texture->platformTexture->handle);
     glUseProgram(Sprite::spriteShader->platformShader->handle);
 
     glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
 
     Math::Vector2 scaledPos = Math::Vector2(
-        2*(position.x / renderWidthScale) - 1, 
+        2*(position.x / renderWidthScale) - 1,
         2*(position.y / renderHeightScale) - 1
     );
     Math::Vector2 scaledSize = Math::Vector2(
@@ -91,8 +94,9 @@ void TeaPacket::Graphics::Sprite::Draw(){
     );
 
     glBufferSubData(GL_UNIFORM_BUFFER, 0,  8, &scaledPos);
-    glBufferSubData(GL_UNIFORM_BUFFER, 8,  4, &angle);
-    glBufferSubData(GL_UNIFORM_BUFFER, 16, 8, &scaledSize);
+    glBufferSubData(GL_UNIFORM_BUFFER, 8,  8, &anchor);
+    glBufferSubData(GL_UNIFORM_BUFFER, 16, 4, &angle);
+    glBufferSubData(GL_UNIFORM_BUFFER, 24, 8, &scaledSize);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     
     glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);

@@ -6,7 +6,7 @@ if(DEBUG)
 endif(DEBUG)
 
 if(PLATFORM_WINDOWS)
-   add_subdirectory(libraries/Windows/GLFW/)
+   add_subdirectory(libraries/Windows/glfw/)
    include_directories(SYSTEM "libraries/Windows/GLAD/include")
    set(libsources "libraries/Windows/GLAD/src/glad.c")
 

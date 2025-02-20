@@ -13,6 +13,7 @@ namespace TeaPacket::Graphics
         TeaPacket::Math::Vector2 position = TeaPacket::Math::Vector2(0,0);
         TeaPacket::Math::Vector2 scale = TeaPacket::Math::Vector2(1,1);
         float angle = 0;
+        TeaPacket::Math::Vector2 anchor = TeaPacket::Math::Vector2(0,0);
 
         TeaPacket::Math::Vector4 color;
 

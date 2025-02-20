@@ -6,8 +6,10 @@ layout(location = 1) in vec2 aTexCoord;
 layout(binding = 0, std140) uniform uTransformData
 {
     vec2 uf_pos; //   8   0
-    float uf_rot; //  4   8
-    vec2 uf_scale; // 8   12
+    vec2 uf_anchor; // 8  8
+    float uf_rot; //  4 -> 8  16
+    vec2 uf_scale; // 8   24
+    //28
 };
 layout(binding = 1, std140) uniform uColorData{
     vec4 uf_color; // 16  0
@@ -21,6 +23,7 @@ void main()
     vec2 transformedPos = aPos;
 
     // I really should use matrices but.. honestly i dont want to bug the poor people of FTU anymore so this will do for now.
+    transformedPos += vec2(uf_anchor.x, -uf_anchor.y);
 
     // Scale
     transformedPos *= uf_scale;
