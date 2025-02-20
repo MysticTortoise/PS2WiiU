@@ -8,9 +8,8 @@
 #include "GLFW/glfw3.h"
 
 #include <filesystem>
+#include "TeaPacket/Scene/SceneScript.hpp"
 #include "TeaPacket/Graphics/Sprite.hpp"
-#include "TeaPacket/Graphics/Texture.hpp"
-#include "TeaPacket/Graphics/Camera.hpp"
 
 using namespace TeaPacket;
 
@@ -48,9 +47,6 @@ int TeaPacket::Initialize(){
     
     Graphics::Sprite::SpriteRendererInit();
 
-    Graphics::Texture* tex = new Graphics::Texture("test.png");
-    sprite = Graphics::Sprite(tex);
-
     return 1;
 }
 
@@ -60,13 +56,12 @@ bool TeaPacket::ShouldRun(){
 
 void TeaPacket::Delay(){}
 
-TeaPacket::Graphics::Camera mainCamera;
-
 void TeaPacket::Update(){
+    Scene::currentScene->Update();
+
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
-    Graphics::Sprite::BeginRenderFromCamera(&mainCamera);
-    sprite.Draw();
+    Scene::currentScene->Draw();
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
