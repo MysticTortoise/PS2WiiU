@@ -41,6 +41,8 @@ void TeaPacket::Scene::SetActiveScene(bool unloadOld){
 }
 
 
+std::vector<SceneScript*> TeaPacket::Scene::readiedScenes  = std::vector<SceneScript*>();
+
 void TeaPacket::Scene::SceneScript::Load() {}
 void TeaPacket::Scene::SceneScript::Start() {}
 void TeaPacket::Scene::SceneScript::Update() {}

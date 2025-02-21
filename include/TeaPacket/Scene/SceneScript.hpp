@@ -14,8 +14,8 @@ namespace TeaPacket::Scene{
     };
 
     template <class T> T* LoadScene();
-    std::vector<SceneScript*> readiedScenes = std::vector<SceneScript*>();
-    SceneScript* currentScene;
+    extern std::vector<SceneScript*> readiedScenes;
+    extern SceneScript* currentScene;
 
     template <class T> 
     void SetActiveScene(bool unloadOld = true);

@@ -30,4 +30,6 @@ namespace TeaPacket::Graphics
         static void SpriteRendererDeInit();
         static void BeginRenderFromCamera(Camera* camera);
     };
+
+    extern TeaPacket::Math::Vector2 renderScale;
 }

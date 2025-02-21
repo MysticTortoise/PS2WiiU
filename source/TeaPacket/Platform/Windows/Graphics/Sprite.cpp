@@ -31,9 +31,6 @@ unsigned int spriteVAO;
 unsigned int spritePosUniformBlock;
 unsigned int spriteColUniformBlock;
 
-float renderWidthScale; // render width in units (aka pixels)
-float renderHeightScale;
-
 glm::mat4 cameraMatrix(1.0f);
 
 TeaPacket::Graphics::Shader* TeaPacket::Graphics::Sprite::spriteShader = nullptr;
@@ -67,10 +64,9 @@ void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
 
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteColUniformBlock);
 
-    Sprite::spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
+    //glDepthMask(GL_FALSE);
 
-    renderWidthScale = TeaPacket::resolutionWidth;
-    renderHeightScale = TeaPacket::resolutionHeight;
+    Sprite::spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
 }
 
 void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
@@ -83,21 +79,17 @@ void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
 
 void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
     cameraMatrix = glm::mat4(1.0f);
-    cameraMatrix = glm::scale(cameraMatrix, glm::vec3(2.0f/renderWidthScale, 2.0f/renderHeightScale, 0));
+    cameraMatrix = glm::scale(cameraMatrix, glm::vec3(2.0f/renderScale.x, 2.0f/renderScale.y, 0));
     cameraMatrix = glm::rotate(cameraMatrix, glm::radians(camera->angle), glm::vec3(0,0,1));
-    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(renderWidthScale * -0.5f, renderHeightScale * -0.5f, 0));
+    cameraMatrix = glm::translate(cameraMatrix, glm::vec3(renderScale.x * -0.5f, renderScale.y * -0.5f, 0));
     cameraMatrix = glm::translate(cameraMatrix, glm::vec3(-camera->position.x/2,-camera->position.y/2,0));
     cameraMatrix = glm::scale(cameraMatrix, glm::vec3(1/camera->scale.x,1/camera->scale.y,0));
 
-    camera->position.x++;
+    glClearColor(camera->bgColor.x, camera->bgColor.y, camera->bgColor.z, camera->bgColor.w);
+    glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
-    position.x = 1280/2;
-    position.y = 720/2;
-    angle = 0;
-    anchor.y = 0;
-
     glBindTexture(GL_TEXTURE_2D, texture->platformTexture->handle);
     glUseProgram(Sprite::spriteShader->platformShader->handle);
 

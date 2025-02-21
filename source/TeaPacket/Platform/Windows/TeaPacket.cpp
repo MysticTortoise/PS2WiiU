@@ -47,6 +47,9 @@ int TeaPacket::Initialize(){
     
     Graphics::Sprite::SpriteRendererInit();
 
+    Scene::currentScene->Load();
+    Scene::currentScene->Start();
+
     return 1;
 }
 
@@ -58,9 +61,6 @@ void TeaPacket::Delay(){}
 
 void TeaPacket::Update(){
     Scene::currentScene->Update();
-
-    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-    glClear(GL_COLOR_BUFFER_BIT);
     Scene::currentScene->Draw();
     glfwSwapBuffers(window);
     glfwPollEvents();

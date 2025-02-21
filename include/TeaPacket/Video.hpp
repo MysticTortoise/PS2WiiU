@@ -1,7 +1,7 @@
 #pragma once
 
 namespace TeaPacket{
-    const extern int resolutionWidth;
-    const extern int resolutionHeight;
-    const extern char* const windowTitle;
+    extern int resolutionWidth;
+    extern int resolutionHeight;
+    const extern char* windowTitle;
 }

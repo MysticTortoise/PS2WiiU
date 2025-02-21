@@ -13,7 +13,7 @@ namespace TeaPacket::Graphics
         PlatformTexture* platformTexture;
 
         Texture(const char* path);
-
         ~Texture();
+
     };
 } // namespace TeaPacket::Graphics

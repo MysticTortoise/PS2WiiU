@@ -32,6 +32,8 @@ TeaPacket::Graphics::Texture::Texture(const char* path){
 }
 
 TeaPacket::Graphics::Texture::~Texture(){
+    glDeleteTextures(1, &platformTexture->handle);
+
     delete platformTexture;
 }
 
