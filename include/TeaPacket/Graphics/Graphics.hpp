@@ -5,5 +5,6 @@ namespace TeaPacket::Graphics{
     void DeInit();
 
     void BeginRender();
+    void BeginSecondScreenRender();
     void EndRender();
 }

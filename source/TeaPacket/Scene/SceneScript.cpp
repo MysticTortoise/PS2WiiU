@@ -46,6 +46,6 @@ std::vector<SceneScript*> TeaPacket::Scene::readiedScenes  = std::vector<SceneSc
 void TeaPacket::Scene::SceneScript::Load() {}
 void TeaPacket::Scene::SceneScript::Start() {}
 void TeaPacket::Scene::SceneScript::Update() {}
-void TeaPacket::Scene::SceneScript::Draw() {}
+void TeaPacket::Scene::SceneScript::Draw(int screenIndex) {}
 void TeaPacket::Scene::SceneScript::Stop() {}
 void TeaPacket::Scene::SceneScript::Deload() {}

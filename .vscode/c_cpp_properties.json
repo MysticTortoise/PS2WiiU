@@ -8,16 +8,20 @@
                 "C:/devkitPro/portlibs",
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/include/Platform",
+
+                "${workspaceFolder}/libraries/common/glm",
                 
                 "${workspaceFolder}/libraries/windows/glfw/include",
                 "${workspaceFolder}/libraries/windows/glad/include",
-                "${workspaceFolder}/libraries/common/glm"
+
+                "${workspaceFolder}/libraries/wiiu"
             ],
             "defines": [
                 "_DEBUG",
                 "UNICODE",
                 "_UNICODE",
                 "TP_WIN",
+                "TP_WIIU",
                 "TP_DEBUG"
             ],
             "windowsSdkVersion": "10.0.22000.0",

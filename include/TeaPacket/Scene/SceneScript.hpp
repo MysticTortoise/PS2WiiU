@@ -8,7 +8,7 @@ namespace TeaPacket::Scene{
         virtual void Load();
         virtual void Start();
         virtual void Update();
-        virtual void Draw();
+        virtual void Draw(int screenIndex = 0);
         virtual void Stop();
         virtual void Deload();
     };

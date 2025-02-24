@@ -23,7 +23,9 @@ int TeaPacket::Initialize(){
 void TeaPacket::Update(){
     Scene::currentScene->Update();
     TeaPacket::Graphics::BeginRender();
-    Scene::currentScene->Draw();
+    Scene::currentScene->Draw(0);
+    TeaPacket::Graphics::BeginSecondScreenRender();
+    Scene::currentScene->Draw(1);
     TeaPacket::Graphics::EndRender();
 }
 

@@ -24,7 +24,8 @@ void PostShift2::TestScene::Update(){
     sprite1.angle++;
 }
 
-void PostShift2::TestScene::Draw(){
+void PostShift2::TestScene::Draw(int screenIndex){
+    if(screenIndex == 1){return;}
     TeaPacket::Graphics::Sprite::BeginRenderFromCamera(&camera);
     sprite1.Draw();
     sprite2.Draw();

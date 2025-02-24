@@ -27,7 +27,7 @@ namespace TeaPacket::Graphics
         static Shader* spriteShader;
         
         static int Init();
-        static int DeInit();
+        static void DeInit();
         static void BeginRenderFromCamera(Camera* camera);
     };
 

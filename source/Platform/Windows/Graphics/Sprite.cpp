@@ -35,7 +35,7 @@ glm::mat4 cameraMatrix(1.0f);
 
 TeaPacket::Graphics::Shader* TeaPacket::Graphics::Sprite::spriteShader = nullptr;
 
-void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
+int TeaPacket::Graphics::Sprite::Init(){
     glGenVertexArrays(1, &spriteVAO);
     glGenBuffers(1, &spriteVBO);
 
@@ -67,9 +67,11 @@ void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
     //glDepthMask(GL_FALSE);
 
     Sprite::spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
+
+    return 1;
 }
 
-void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
+void TeaPacket::Graphics::Sprite::DeInit(){
     glDeleteVertexArrays(1, &spriteVAO);
     glDeleteBuffers(1, &spriteVBO);
 
