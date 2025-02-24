@@ -12,6 +12,6 @@ TeaPacket::Scene::SceneScript* TeaPacket::Scene::currentScene = new PostShift2::
 
 int TeaPacket::Video::resolutionHeight = 720;
 int TeaPacket::Video::resolutionWidth = 1280;
-const char* TeaPacket::windowTitle = "Post-Shift 2";
+const char* TeaPacket::Video::windowTitle = "Post-Shift 2";
 
 Math::Vector2 TeaPacket::Graphics::renderScale(1280, 720);
