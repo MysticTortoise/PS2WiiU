@@ -1,11 +1,11 @@
 #ifdef TP_WIN
 #include "TeaPacket/Graphics/Sprite.hpp"
-#include "TeaPacket/Platform/Windows/Graphics/PlatformTextureWin.hpp"
+#include "Windows/Graphics/PlatformTexture.hpp"
 
 #include "TeaPacket/Video.hpp"
 
 #include "TeaPacket/Graphics/Shader.hpp"
-#include "TeaPacket/Platform/Windows/Graphics/PlatformShaderWin.hpp"
+#include "Windows/Graphics/PlatformShader.hpp"
 #include "TeaPacket/Math/Vector2.hpp"
 #include "TeaPacket/Math/Vector4.hpp"
 

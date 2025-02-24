@@ -7,7 +7,6 @@ endif(DEBUG)
 
 if(PLATFORM_WINDOWS)
    add_subdirectory(libraries/windows/glfw/)
-   add_subdirectory(libraries/windows/glm/)
    include_directories(SYSTEM "libraries/windows/GLAD/include")
    set(libsources "libraries/windows/GLAD/src/glad.c")
 
@@ -17,6 +16,8 @@ endif(PLATFORM_WINDOWS)
 if(PLATFORM_WIIU)
    set(CMAKE_TOOLCHAIN_FILE /opt/devkitpro/cmake/WiiU.cmake)
 endif(PLATFORM_WIIU)
+
+add_subdirectory(libraries/common/glm/)
 
 file(GLOB_RECURSE sources source/*.cpp source/*.c)
 file(GLOB_RECURSE includes include/*.h include/*.hpp)

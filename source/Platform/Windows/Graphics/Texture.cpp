@@ -1,6 +1,6 @@
 #ifdef TP_WIN
 #include "TeaPacket/Graphics/Texture.hpp"
-#include "TeaPacket/Platform/Windows/Graphics/PlatformTextureWin.hpp"
+#include "Windows/Graphics/PlatformTexture.hpp"
 
 #include "TeaPacket/DebugMacros.hpp"
 

@@ -1,6 +1,6 @@
 #ifdef TP_WIN
 #include "TeaPacket/Graphics/Shader.hpp"
-#include "TeaPacket/Platform/Windows/Graphics/PlatformShaderWin.hpp"
+#include "Windows/Graphics/PlatformShader.hpp"
 
 #include "TeaPacket/Files/Files.hpp"
 
