@@ -24,7 +24,7 @@ file(GLOB_RECURSE includes include/*.h include/*.hpp)
 add_executable(CrossShift2
    ${sources} ${includes} ${libsources})
 
-target_include_directories(CrossShift2 PRIVATE include)
+target_include_directories(CrossShift2 PRIVATE include include/Platform)
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 

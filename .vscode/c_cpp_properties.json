@@ -9,7 +9,7 @@
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/libraries/windows/glfw/include",
                 "${workspaceFolder}/libraries/windows/glad/include",
-                "${workspaceFolder}/libraries/windows/glm"
+                "${workspaceFolder}/libraries/common/glm"
             ],
             "defines": [
                 "_DEBUG",
