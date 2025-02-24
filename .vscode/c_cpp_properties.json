@@ -8,7 +8,7 @@
                 "C:/devkitPro/portlibs",
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/include/Platform",
-
+                
                 "${workspaceFolder}/libraries/windows/glfw/include",
                 "${workspaceFolder}/libraries/windows/glad/include",
                 "${workspaceFolder}/libraries/common/glm"

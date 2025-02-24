@@ -74,6 +74,7 @@
         "list": "cpp",
         "random": "cpp",
         "unordered_map": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "span": "cpp"
     }
 }
