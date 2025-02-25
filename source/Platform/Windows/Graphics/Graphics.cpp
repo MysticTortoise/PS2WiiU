@@ -2,7 +2,7 @@
 // Implementing
 #include "TeaPacket/Graphics/Graphics.hpp"
 // TeaPacket Utilities
-#include "TeaPacket/DebugMacros.hpp"
+#include "TeaPacket/Logging.hpp"
 // External Libraries
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -19,14 +19,14 @@ int TeaPacket::Graphics::Init(){
 
     TeaPacket::Video::window = glfwCreateWindow(TeaPacket::Video::resolutionWidth, TeaPacket::Video::resolutionHeight, TeaPacket::Video::windowTitle, NULL, NULL);
     if(TeaPacket::Video::window == NULL){
-        ERROR("Failed to create window!");
+        TeaPacket::Print("ERROR! Failed to create window!");
         return -1;
     }
 
     glfwMakeContextCurrent(TeaPacket::Video::window);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        ERROR("Failed to initialize GLAD!");
+        TeaPacket::Print("ERROR! Failed to initialize GLAD!");
         return -1;
     }
     return 1;

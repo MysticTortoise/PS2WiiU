@@ -7,5 +7,6 @@ namespace TeaPacket::Graphics{
         PlatformShader* platformShader;
 
         Shader(const char* vertexShaderPath, const char* fragmentShaderPath);
+        ~Shader();
     };
 }

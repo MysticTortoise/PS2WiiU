@@ -1,6 +1,6 @@
 #include "Game/Scenes/TestScene.hpp"
 
-#include "TeaPacket/DebugMacros.hpp"
+#include "TeaPacket/Logging.hpp"
 
 #include <cmath>
 using namespace TeaPacket;
@@ -17,6 +17,8 @@ void PostShift2::TestScene::Load(){
 
     sprite2.position.x = 1280/2;
     sprite2.position.y = 720/4;
+
+    camera.bgColor = Math::Vector4(1,0,0);
 }
 
 void PostShift2::TestScene::Update(){

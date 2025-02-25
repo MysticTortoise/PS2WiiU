@@ -1,3 +1,4 @@
+#ifdef TP_WIIU
 #include "TeaPacket/Files/Files.hpp"
 #include <filesystem>
 
@@ -11,3 +12,10 @@ int TeaPacket::Files::Init(){
 void TeaPacket::Files::DeInit(){
     romfsExit();
 }
+
+std::string TeaPacket::Files::GetFilePath(const char* path){
+    std::string string = "romfs:/";
+    string.append(path);
+    return string;
+}
+#endif

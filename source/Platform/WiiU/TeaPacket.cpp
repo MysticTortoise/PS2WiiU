@@ -1,8 +1,6 @@
-#ifdef TP_WIN
+#ifdef TP_WIIU
 #include "TeaPacket/TeaPacket.hpp"
 #include "TeaPacket/Video.hpp"
-
-#include "TeaPacket/DebugMacros.hpp"
 
 #include <whb/proc.h>
 
