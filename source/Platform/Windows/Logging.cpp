@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-void TeaPacket::Print(std::string val){
+void TeaPacket::PrintString(std::string val) {
     std::cout << val << std::endl;
 }
 

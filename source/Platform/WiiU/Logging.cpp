@@ -5,8 +5,9 @@
 #include <whb/log_udp.h>
 #include <whb/proc.h>
 
-void TeaPacket::Print(std::string val){
-    OSReport(val.c_str());
+void TeaPacket::PrintString(std::string val) {
+    std::string temp(val + "\n");
+    OSReport(temp.c_str());
 }
 
 int TeaPacket::LogInit(){

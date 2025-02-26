@@ -5,13 +5,18 @@ layout(location = 1) in vec2 aTexCoord;
 
 layout(location = 0) out vec2 TexCoord;
 
-layout(binding = 0, std140) uniform uTransformData
+layout(binding = 0, std140) uniform uObjectData
 {
-    mat4 matrix;
+    mat4 objectMatrix;
+};
+
+layout(binding = 1, std140) uniform uStaticData
+{
+    mat4 cameraMatrix;
 };
 
 void main()
 {
     TexCoord = aTexCoord;
-    gl_Position = matrix * vec4(aPos,0.0,1.0);
+    gl_Position = cameraMatrix * objectMatrix * vec4(aPos,0.0,1.0);
 }

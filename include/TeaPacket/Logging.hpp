@@ -6,13 +6,25 @@
 #endif
 
 namespace TeaPacket{
-    template<typename T>
-    void Print(T val);
+    void PrintString(std::string val);
 
-    void Print(std::string val);
-    void Print(char* val);
-    void Print(const char* val);
+    template<typename T>
+    inline void Print(T val){
+        PrintString(std::to_string(val));
+    }
+
+    inline void Print(std::string val){
+        PrintString(val);
+    }
+    
+    inline void Print(char* val){
+        PrintString(std::string(val));
+    }
+    inline void Print(const char* val){
+        PrintString(std::string(val));
+    }
 
     int LogInit();
     void LogDeInit();
 }
+
