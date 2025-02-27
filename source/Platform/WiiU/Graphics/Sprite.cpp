@@ -1,6 +1,6 @@
 #ifdef TP_WIIU
 #include "TeaPacket/Graphics/Sprite.hpp"
-#include "Windows/Graphics/PlatformTexture.hpp"
+#include "wiiu/Graphics/PlatformTexture.hpp"
 
 #include "TeaPacket/Video.hpp"
 
@@ -113,8 +113,8 @@ void TeaPacket::Graphics::Sprite::Draw(){
     GX2SetShaderMode(GX2_SHADER_MODE_UNIFORM_BLOCK);
 
     glm::mat4 objectMat(1.0f);
-    glm::vec3 anchorOffset(anchor.x, -anchor.y, 0);
-    glm::vec3 pixelSize(256, 256, 0);
+    glm::vec3 anchorOffset(anchor.x, -anchor.y, 0); 
+    glm::vec3 pixelSize(texture->width, texture->height, 0);
 
     objectMat = glm::translate(objectMat, ((glm::vec3)position) + anchorOffset * pixelSize);
     objectMat = glm::scale(objectMat,pixelSize);
@@ -130,6 +130,9 @@ void TeaPacket::Graphics::Sprite::Draw(){
     //memcpy(matrixUniformBlock, testMatrix, sizeof(testMatrix));
     GX2SetVertexUniformBlock(0, sizeof(objectUniformBlock), (void*)objectUniformBlock);
     GX2Invalidate((GX2InvalidateMode)(GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_UNIFORM_BLOCK), objectUniformBlock, sizeof(objectUniformBlock));
+
+    GX2SetPixelTexture(texture->platformTexture->gx2Tex, spriteShader->platformShader->whbGroup->pixelShader->samplerVars[0].location);
+    GX2SetPixelSampler(texture->platformTexture->gx2Sampler, spriteShader->platformShader->whbGroup->pixelShader->samplerVars[0].location);
 
     GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 6, 0, 1);
 }   

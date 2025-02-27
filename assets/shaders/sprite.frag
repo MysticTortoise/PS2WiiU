@@ -5,7 +5,9 @@ layout(location = 1) in vec4 Color;
 
 layout(location = 0) out vec4 FragColor;
 
+layout(binding = 0) uniform sampler2D spriteTexture;
+
 void main()
 {
-    FragColor = vec4(1.0, 1.0, 0.0, 1.0) + (Color * vec4(0.0,0.0,0.0,0.0));
+    FragColor = texture(spriteTexture, TexCoord) + (Color * vec4(0.0,0.0,0.0,0.0));
 }

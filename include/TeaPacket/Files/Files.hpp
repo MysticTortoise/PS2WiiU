@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <string>
+#include <vector>
 
 namespace TeaPacket::Files{
 
@@ -10,5 +11,5 @@ namespace TeaPacket::Files{
 
     std::string GetFilePath(const char* path);
     std::string ReadTextFile(const char* path);
-    const char* ReadBinaryFile(const char* path, size_t* size);
+    std::vector<char> ReadBinaryFile(const char* path);
 }

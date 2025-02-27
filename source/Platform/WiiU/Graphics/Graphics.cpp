@@ -12,7 +12,6 @@
 #include <coreinit/debug.h>
 
 int TeaPacket::Graphics::Init(){
-    OSReport("Init");
     if(!GLSL_Init())  { return -1; }
     if(!WHBGfxInit()) { return -1; }
     return 1;

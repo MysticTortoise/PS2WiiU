@@ -40,6 +40,7 @@ void TeaPacket::Graphics::BeginRender(){}
 
 void TeaPacket::Graphics::BeginSecondScreenRender(){}
 
+
 void TeaPacket::Graphics::EndRender(){
     glfwSwapBuffers(TeaPacket::Video::window);
     glfwPollEvents();
