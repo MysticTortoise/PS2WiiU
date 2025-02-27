@@ -1,16 +1,13 @@
-#ifdef TP_WIN
+#ifdef TP_WIIU
 #include "TeaPacket/TeaPacket.hpp"
 #include "TeaPacket/Video.hpp"
 
-#include "glad/glad.h"
-#include "GLFW/glfw3.h"
-
-#include "windows/Video.hpp"
+#include <whb/proc.h>
 
 using namespace TeaPacket;
 
 bool TeaPacket::ShouldRun(){
-    return !glfwWindowShouldClose(TeaPacket::Video::window);
+    return WHBProcIsRunning();
 }
 
 void TeaPacket::Delay(){}

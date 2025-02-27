@@ -11,7 +11,7 @@ namespace PostShift2
         public:
         void Load() override;
         void Update() override;
-        void Draw() override;
+        void Draw(int screenIndex = 0) override;
         void Deload() override;
         private:
 

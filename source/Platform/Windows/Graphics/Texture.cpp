@@ -2,7 +2,7 @@
 #include "TeaPacket/Graphics/Texture.hpp"
 #include "Windows/Graphics/PlatformTexture.hpp"
 
-#include "TeaPacket/DebugMacros.hpp"
+#include "TeaPacket/Logging.hpp"
 
 #include "glad/glad.h"
 #include "GLFW/glfw3.h"
@@ -23,7 +23,7 @@ TeaPacket::Graphics::Texture::Texture(const char* path){
         glGenerateMipmap(GL_TEXTURE_2D);
         
     } else {
-        ERROR("Failed to load texture " << path);
+        TeaPacket::Print("Failed to load texture " + std::string(path));
     }
     stbi_image_free(data);
 

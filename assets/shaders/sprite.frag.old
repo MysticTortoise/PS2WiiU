@@ -9,5 +9,6 @@ layout(binding = 0) uniform sampler2D spriteTexture;
 
 void main()
 {
-    FragColor = texture(spriteTexture, TexCoord) * Color;
+    FragColor = texture(spriteTexture, TexCoord);
+    FragColor *= Color;
 }

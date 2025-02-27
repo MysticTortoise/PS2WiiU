@@ -16,7 +16,7 @@ namespace TeaPacket::Graphics
         float angle = 0;
         TeaPacket::Math::Vector2 anchor = TeaPacket::Math::Vector2(0,0);
 
-        TeaPacket::Math::Vector4 color;
+        TeaPacket::Math::Vector4 color = TeaPacket::Math::Vector4(1,1,1,1);
 
         
         Texture* texture;
@@ -27,7 +27,7 @@ namespace TeaPacket::Graphics
         static Shader* spriteShader;
         
         static int Init();
-        static int DeInit();
+        static void DeInit();
         static void BeginRenderFromCamera(Camera* camera);
     };
 

@@ -15,7 +15,7 @@
 #include "glm/glm.hpp"
 #include "glm/gtc/type_ptr.hpp"
 #include "glm/gtc/matrix_transform.hpp"
-#include "TeaPacket/DebugMacros.hpp"
+#include "TeaPacket/Logging.hpp"
 
 const float spriteVertexDataBase[24] = {
     -1.0f, -1.0f, 0.0f, 1.0f, // Bottom left
@@ -28,14 +28,14 @@ const float spriteVertexDataBase[24] = {
 
 unsigned int spriteVBO;
 unsigned int spriteVAO;
-unsigned int spritePosUniformBlock;
-unsigned int spriteColUniformBlock;
+unsigned int spriteObjectUniformBlock;
+unsigned int spriteStaticUniformBlock;
 
 glm::mat4 cameraMatrix(1.0f);
 
 TeaPacket::Graphics::Shader* TeaPacket::Graphics::Sprite::spriteShader = nullptr;
 
-void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
+int TeaPacket::Graphics::Sprite::Init(){
     glGenVertexArrays(1, &spriteVAO);
     glGenBuffers(1, &spriteVBO);
 
@@ -50,26 +50,28 @@ void TeaPacket::Graphics::Sprite::SpriteRendererInit(){
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glGenBuffers(1, &spritePosUniformBlock);
-    glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
-    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4) * 2, NULL, GL_STATIC_DRAW);
+    glGenBuffers(1, &spriteObjectUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteObjectUniformBlock);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4) + sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 0, spritePosUniformBlock);
+    glBindBufferBase(GL_UNIFORM_BUFFER, 0, spriteObjectUniformBlock);
 
-    glGenBuffers(1, &spriteColUniformBlock);
-    glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);
-    glBufferData(GL_UNIFORM_BUFFER, 16, NULL, GL_STATIC_DRAW);
+    glGenBuffers(1, &spriteStaticUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteStaticUniformBlock);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteColUniformBlock);
+    glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteStaticUniformBlock);
 
     //glDepthMask(GL_FALSE);
 
     Sprite::spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
+
+    return 1;
 }
 
-void TeaPacket::Graphics::Sprite::SpriteRendererDeInit(){
+void TeaPacket::Graphics::Sprite::DeInit(){
     glDeleteVertexArrays(1, &spriteVAO);
     glDeleteBuffers(1, &spriteVBO);
 
@@ -104,13 +106,13 @@ void TeaPacket::Graphics::Sprite::Draw(){
     objectMat = glm::scale(objectMat, glm::vec3(scale.x*0.5f,scale.y*0.5f,0));
     objectMat = glm::translate(objectMat, anchorOffset);
 
-    glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteObjectUniformBlock);
     glBufferSubData(GL_UNIFORM_BUFFER, 0,  sizeof(glm::mat4), glm::value_ptr(objectMat));
-    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4),  sizeof(glm::mat4), glm::value_ptr(cameraMatrix));
+    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::vec4), &color);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     
-    glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);
-    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16, &color);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteStaticUniformBlock);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cameraMatrix));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     glBindVertexArray(spriteVAO);
