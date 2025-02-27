@@ -46,7 +46,25 @@ TeaPacket::Graphics::Shader* TeaPacket::Graphics::Sprite::spriteShader = nullptr
 static GX2RBuffer positionBuffer = {};
 static GX2RBuffer uvBuffer = {};
 
-alignas(0x100) uint32_t TeaPacket::Graphics::Sprite::staticUniformBlock[16] = {};
+alignas(0x100) static uint32_t staticUniformBlock[16] = {};
+
+
+struct ObjectUniformBlock{
+    alignas(0x100) uint32_t blockData[20] = {};
+};
+
+#define OBJECT_UNIFORM_BLOCK_RING_SIZE 32
+
+static ObjectUniformBlock objectUniformBlockRing[OBJECT_UNIFORM_BLOCK_RING_SIZE] = {};
+static uint8_t objectUniformBlockRingIndex = 0;
+
+static ObjectUniformBlock* GetNextObjectUniformBlock(){
+    if(++objectUniformBlockRingIndex >= OBJECT_UNIFORM_BLOCK_RING_SIZE){
+        objectUniformBlockRingIndex = 0;
+    }
+    return &objectUniformBlockRing[objectUniformBlockRingIndex];
+}
+
 
 int TeaPacket::Graphics::Sprite::Init(){
     spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
@@ -102,11 +120,26 @@ void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
     for(size_t i = 0; i < 16; i++){
         staticUniformBlock[i] = _swapF32(glm::value_ptr(cameraMatrix)[i]);
     }
+
     GX2SetVertexUniformBlock(1, sizeof(staticUniformBlock), (void*)staticUniformBlock);
     GX2Invalidate((GX2InvalidateMode)(GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_UNIFORM_BLOCK), staticUniformBlock, sizeof(staticUniformBlock));
+
+    // Setup Blend Mode
+    GX2SetAlphaTest(GX2_TRUE, GX2_COMPARE_FUNC_GREATER, 0.0f);
+    GX2SetColorControl(GX2_LOGIC_OP_COPY, 0xFF, TRUE, TRUE);
+    GX2SetBlendControl(GX2_RENDER_TARGET_0,
+                /* RGB = [srcRGB * srcA] + [dstRGB * (1-srcA)] */
+                GX2_BLEND_MODE_SRC_ALPHA, GX2_BLEND_MODE_INV_SRC_ALPHA,
+                GX2_BLEND_COMBINE_MODE_ADD,
+                TRUE,
+                /* A = [srcA * 1] + [dstA * (1-srcA)] */
+                GX2_BLEND_MODE_INV_SRC_ALPHA, GX2_BLEND_MODE_ONE,
+                GX2_BLEND_COMBINE_MODE_ADD);
+    GX2SetDepthOnlyControl(GX2_FALSE, GX2_FALSE, GX2_COMPARE_FUNC_ALWAYS);
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
+        
     GX2SetFetchShader(&(spriteShader->platformShader->whbGroup->fetchShader));
     GX2SetVertexShader(spriteShader->platformShader->whbGroup->vertexShader);
     GX2SetPixelShader(spriteShader->platformShader->whbGroup->pixelShader);
@@ -123,9 +156,15 @@ void TeaPacket::Graphics::Sprite::Draw(){
     objectMat = glm::scale(objectMat, glm::vec3(scale.x*0.5f,scale.y*0.5f,0));
     objectMat = glm::translate(objectMat, anchorOffset);
 
+    uint32_t* objectUniformBlock = GetNextObjectUniformBlock()->blockData;
+
     for(size_t i = 0; i < 16; i++){
         objectUniformBlock[i] = _swapF32(glm::value_ptr(objectMat)[i]);
     }
+    objectUniformBlock[16] = _swapF32(color.x);
+    objectUniformBlock[17] = _swapF32(color.y);
+    objectUniformBlock[18] = _swapF32(color.z);
+    objectUniformBlock[19] = _swapF32(color.w);
 
     //memcpy(matrixUniformBlock, testMatrix, sizeof(testMatrix));
     GX2SetVertexUniformBlock(0, sizeof(objectUniformBlock), (void*)objectUniformBlock);

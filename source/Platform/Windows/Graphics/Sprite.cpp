@@ -28,8 +28,8 @@ const float spriteVertexDataBase[24] = {
 
 unsigned int spriteVBO;
 unsigned int spriteVAO;
-unsigned int spritePosUniformBlock;
-unsigned int spriteColUniformBlock;
+unsigned int spriteObjectUniformBlock;
+unsigned int spriteStaticUniformBlock;
 
 glm::mat4 cameraMatrix(1.0f);
 
@@ -50,19 +50,19 @@ int TeaPacket::Graphics::Sprite::Init(){
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void*)(2 * sizeof(float)));
     glEnableVertexAttribArray(1);
 
-    glGenBuffers(1, &spritePosUniformBlock);
-    glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
-    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4) * 2, NULL, GL_STATIC_DRAW);
+    glGenBuffers(1, &spriteObjectUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteObjectUniformBlock);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4) + sizeof(glm::vec4), NULL, GL_DYNAMIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 0, spritePosUniformBlock);
+    glBindBufferBase(GL_UNIFORM_BUFFER, 0, spriteObjectUniformBlock);
 
-    glGenBuffers(1, &spriteColUniformBlock);
-    glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);
-    glBufferData(GL_UNIFORM_BUFFER, 16, NULL, GL_STATIC_DRAW);
+    glGenBuffers(1, &spriteStaticUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteStaticUniformBlock);
+    glBufferData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), NULL, GL_STATIC_DRAW);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
-    glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteColUniformBlock);
+    glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteStaticUniformBlock);
 
     //glDepthMask(GL_FALSE);
 
@@ -106,13 +106,13 @@ void TeaPacket::Graphics::Sprite::Draw(){
     objectMat = glm::scale(objectMat, glm::vec3(scale.x*0.5f,scale.y*0.5f,0));
     objectMat = glm::translate(objectMat, anchorOffset);
 
-    glBindBuffer(GL_UNIFORM_BUFFER, spritePosUniformBlock);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteObjectUniformBlock);
     glBufferSubData(GL_UNIFORM_BUFFER, 0,  sizeof(glm::mat4), glm::value_ptr(objectMat));
-    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4),  sizeof(glm::mat4), glm::value_ptr(cameraMatrix));
+    glBufferSubData(GL_UNIFORM_BUFFER, sizeof(glm::mat4), sizeof(glm::vec4), &color);
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
     
-    glBindBuffer(GL_UNIFORM_BUFFER, spriteColUniformBlock);
-    glBufferSubData(GL_UNIFORM_BUFFER, 0, 16, &color);
+    glBindBuffer(GL_UNIFORM_BUFFER, spriteStaticUniformBlock);
+    glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(glm::mat4), glm::value_ptr(cameraMatrix));
     glBindBuffer(GL_UNIFORM_BUFFER, 0);
 
     glBindVertexArray(spriteVAO);

@@ -14,21 +14,24 @@ void PostShift2::TestScene::Load(){
 
     
     sprite1.position.y = 720/2;
+    sprite1.position.y = 720/4;
 
     sprite2.position.x = 1280/2;
     sprite2.position.y = 720/4;
 
     camera.bgColor = Math::Vector4(1,0,0);
+    sprite2.color.w = 0.5f;
 }
 
 void PostShift2::TestScene::Update(){
-    sprite1.position.x = (sin(sprite1.angle/20) * 1280/2) + 1280/2;
+    sprite1.position.x = (sin(sprite1.angle/20) * 1280/4) + 1280/2;
     sprite1.angle++;
 }
 
 void PostShift2::TestScene::Draw(int screenIndex){
     if(screenIndex == 1){return;}
     TeaPacket::Graphics::Sprite::BeginRenderFromCamera(&camera);
+    
     sprite1.Draw();
     sprite2.Draw();
 }

@@ -16,9 +16,7 @@ namespace TeaPacket::Graphics
         float angle = 0;
         TeaPacket::Math::Vector2 anchor = TeaPacket::Math::Vector2(0,0);
 
-        TeaPacket::Math::Vector4 color;
-
-        alignas(0x100) uint32_t objectUniformBlock[16];
+        TeaPacket::Math::Vector4 color = TeaPacket::Math::Vector4(1,1,1,1);
 
         
         Texture* texture;
@@ -27,7 +25,6 @@ namespace TeaPacket::Graphics
         void Draw();
 
         static Shader* spriteShader;
-        alignas(0x100) static uint32_t staticUniformBlock[16];
         
         static int Init();
         static void DeInit();

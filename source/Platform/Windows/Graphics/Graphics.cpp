@@ -10,6 +10,7 @@
 #include "TeaPacket/Video.hpp"
 #include "windows/Video.hpp"
 
+GLFWwindow* TeaPacket::Video::window = nullptr;
 
 int TeaPacket::Graphics::Init(){
     glfwInit();

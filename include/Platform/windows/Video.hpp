@@ -4,5 +4,5 @@
 #include "GLFW/glfw3.h"
 
 namespace TeaPacket::Video{
-    GLFWwindow* window;
+    extern GLFWwindow* window;
 }
