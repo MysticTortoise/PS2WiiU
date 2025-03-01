@@ -64,7 +64,12 @@ int TeaPacket::Graphics::Sprite::Init(){
 
     glBindBufferBase(GL_UNIFORM_BUFFER, 1, spriteStaticUniformBlock);
 
-    //glDepthMask(GL_FALSE);
+    glEnable(GL_BLEND);
+    glBlendFunc(
+        GL_SRC_ALPHA,
+        GL_ONE_MINUS_SRC_ALPHA
+    );
+    glDepthMask(GL_FALSE);
 
     Sprite::spriteShader = new Shader("shaders/sprite.vert", "shaders/sprite.frag");
 
