@@ -8,33 +8,88 @@
 #include "GLFW/glfw3.h"
 #include "stb/stb_image.h"
 
-TeaPacket::Graphics::Texture::Texture(const char* path){
+using namespace TeaPacket::Graphics;
+
+namespace {
+    struct GLFormat {
+        GLint channelType;
+        GLenum bitDepth;
+    };
+
+    struct GLFilter {
+        GLint minFilter;
+        GLint magFilter;
+    };
+
+
+    // Convert TeaPacket TextureFormat enum into a GLFormat struct.
+    static GLFormat GetGLFormatFromTPFormat(TextureFormat format) {
+        switch (format) {
+        case TEXTURE_FORMAT_RGBA8:
+            return {
+                GL_RGBA,
+                GL_UNSIGNED_BYTE
+            };
+        }
+        return {};
+    }
+    // Conver TeaPacket TextureFilterType enum into a GLFilter struct.
+    static GLFilter GetGLFilterFromTPFilter(TextureFilterType filter) {
+        switch (filter) {
+        case TEXTURE_FILTER_LINEAR:
+            return {
+                GL_LINEAR_MIPMAP_LINEAR,
+                GL_LINEAR
+            };
+        case TEXTURE_FILTER_POINT:
+            return {
+                GL_NEAREST_MIPMAP_NEAREST,
+                GL_NEAREST
+            };
+        }
+        return {};
+    }
+}
+
+TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filterType) :
+    platformTexture(new PlatformTexture()),
+    filterType(filterType)
+{
+    // Generate Texture
     unsigned int handle;
     glGenTextures(1, &handle);
     glBindTexture(GL_TEXTURE_2D, handle);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    // Set Filter Params
+    GLFilter filter = GetGLFilterFromTPFilter(filterType);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter.minFilter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter.magFilter);
+    // Load IMG
+    int channelCount;
+    unsigned char* data = stbi_load(path, &width, &height, &channelCount, 4);
+    // TODO: Format
+    format = TEXTURE_FORMAT_RGBA8;
+    GLFormat glFormat = GetGLFormatFromTPFormat(format);
 
-    unsigned char* data = stbi_load(path, &width, &height, &channelCount, 0);
-    if(data){
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+    // Send data
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
         glGenerateMipmap(GL_TEXTURE_2D);
-        
-    } else {
+
+    }
+    else {
         TeaPacket::Print("Failed to load texture " + std::string(path));
     }
+    // Delete no longer necessary data
     stbi_image_free(data);
-
-    platformTexture = new PlatformTexture();
+    // Setup platformTexture
     platformTexture->handle = handle;
 }
 
-TeaPacket::Graphics::Texture::~Texture(){
+TeaPacket::Graphics::Texture::~Texture() {
     glDeleteTextures(1, &platformTexture->handle);
 
     delete platformTexture;
 }
-
 #endif

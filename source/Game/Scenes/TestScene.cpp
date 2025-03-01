@@ -6,7 +6,7 @@
 using namespace TeaPacket;
 
 void PostShift2::TestScene::Load(){
-    testTex1 = new Graphics::Texture("test.png");
+    testTex1 = new Graphics::Texture("test.png", TeaPacket::Graphics::TEXTURE_FILTER_POINT);
     testTex2 = new Graphics::Texture("test2.png");
 
     sprite1.texture = testTex1;
@@ -19,13 +19,15 @@ void PostShift2::TestScene::Load(){
     sprite2.position.x = 1280/2;
     sprite2.position.y = 720/4;
 
+    sprite1.scale = Math::Vector2(4,4);
+
     camera.bgColor = Math::Vector4(1,0,0);
     sprite2.color.w = 0.5f;
 }
 
 void PostShift2::TestScene::Update(){
-    sprite1.position.x = (sin(sprite1.angle/20) * 1280/4) + 1280/2;
-    sprite1.angle++;
+    sprite1.position.x = (sin(sprite1.angle/40) * 1280/4) + 1280/2;
+    sprite1.angle += 0.1f;
 }
 
 void PostShift2::TestScene::Draw(int screenIndex){
