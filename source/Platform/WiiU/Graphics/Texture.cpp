@@ -65,7 +65,7 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     texture->surface.image = MEMAllocFromDefaultHeapEx(texture->surface.imageSize, texture->surface.alignment);
 
     size_t widthSizeInBytes = (sizeof(char) * 4 * width);
-    for (int y = 0; y < height; y++) {
+    for (unsigned int y = 0; y < height; y++) {
         size_t offset = y * texture->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)texture->surface.image + offset;
         memcpy(firstPixel, (data + widthSizeInBytes * y), widthSizeInBytes);
@@ -81,6 +81,16 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
 TeaPacket::Graphics::Texture::~Texture() {
     MEMFreeToDefaultHeap(platformTexture->gx2Tex->surface.image);
     delete platformTexture;
+}
+
+bool TeaPacket::Graphics::Texture::UpdateContents(unsigned char* data){
+    size_t widthSizeInBytes = (sizeof(char) * 4 * width);
+    for (unsigned int y = 0; y < height; y++) {
+        size_t offset = y * platformTexture->gx2Tex->surface.pitch;
+        uint32_t* firstPixel = (uint32_t*)platformTexture->gx2Tex->surface.image + offset;
+        memcpy(firstPixel, (data + widthSizeInBytes * y), widthSizeInBytes);
+    }
+    return true;
 }
 
 #endif

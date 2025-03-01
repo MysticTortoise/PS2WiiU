@@ -25,9 +25,15 @@ void PostShift2::TestScene::Load(){
     sprite2.color.w = 0.5f;
 }
 
+#include "TeaPacket/Files/Files.hpp"
+#include "stb/stb_image.h"
+using namespace TeaPacket::Graphics;
+
+
 void PostShift2::TestScene::Update(){
     sprite1.position.x = (sin(sprite1.angle/40) * 1280/4) + 1280/2;
     sprite1.angle += 0.1f;
+
 }
 
 void PostShift2::TestScene::Draw(int screenIndex){
