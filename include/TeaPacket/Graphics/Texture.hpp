@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 
 namespace TeaPacket::Graphics
 {
@@ -25,8 +26,11 @@ namespace TeaPacket::Graphics
         TextureFormat format = TEXTURE_FORMAT_RGBA8;
         public:
 
-        Texture(const char* path, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
+        Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
         ~Texture();
+
+        public:
+        static Texture* LoadFromFile(const char* path, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
 
     };
 } // namespace TeaPacket::Graphics

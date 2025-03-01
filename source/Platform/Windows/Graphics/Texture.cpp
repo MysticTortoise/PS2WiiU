@@ -26,6 +26,7 @@ namespace {
     static GLFormat GetGLFormatFromTPFormat(TextureFormat format) {
         switch (format) {
         case TEXTURE_FORMAT_RGBA8:
+        default:
             return {
                 GL_RGBA,
                 GL_UNSIGNED_BYTE
@@ -51,7 +52,7 @@ namespace {
     }
 }
 
-TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filterType) :
+TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType) :
     platformTexture(new PlatformTexture()),
     filterType(filterType)
 {
@@ -67,22 +68,21 @@ TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filter
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter.magFilter);
     // Load IMG
     int channelCount;
-    unsigned char* data = stbi_load(path, &width, &height, &channelCount, 4);
+    unsigned char* imageData = stbi_load_from_memory(data, dataSize, &width, &height, &channelCount, STBI_rgb_alpha);
     // TODO: Format
     format = TEXTURE_FORMAT_RGBA8;
     GLFormat glFormat = GetGLFormatFromTPFormat(format);
-
     // Send data
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
+    if (imageData) {
+        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, imageData);
         glGenerateMipmap(GL_TEXTURE_2D);
-
     }
     else {
-        TeaPacket::Print("Failed to load texture " + std::string(path));
+        TeaPacket::Print("Failed to load texture.");
+        Print(stbi_failure_reason());
     }
     // Delete no longer necessary data
-    stbi_image_free(data);
+    stbi_image_free(imageData);
     // Setup platformTexture
     platformTexture->handle = handle;
 }

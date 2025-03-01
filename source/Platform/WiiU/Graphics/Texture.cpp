@@ -36,13 +36,12 @@ namespace {
     }
 }
 
-TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filterType) :
+TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType) :
     platformTexture(new PlatformTexture()),
     filterType(filterType)
 {
-    std::vector<char> pngData = TeaPacket::Files::ReadBinaryFile(path);
     int channelCount;
-    uint8_t* pngLoaded = stbi_load_from_memory((unsigned char*)pngData.data(), pngData.size() * sizeof(pngData[0]), &width, &height, &channelCount, 4);
+    uint8_t* imageData = stbi_load_from_memory(data, dataSize, &width, &height, &channelCount, 4);
     GX2Texture* texture = new GX2Texture();
 
     texture->surface.width = width;
@@ -68,7 +67,7 @@ TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filter
     for (int y = 0; y < height; y++) {
         size_t offset = y * texture->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)texture->surface.image + offset;
-        memcpy(firstPixel, (pngLoaded + widthSizeInBytes * y), widthSizeInBytes);
+        memcpy(firstPixel, (imageData + widthSizeInBytes * y), widthSizeInBytes);
     }
 
     GX2Sampler* sampler = new GX2Sampler();
@@ -77,7 +76,7 @@ TeaPacket::Graphics::Texture::Texture(const char* path, TextureFilterType filter
     platformTexture->gx2Tex = texture;
     platformTexture->gx2Sampler = sampler;
 
-    stbi_image_free(pngLoaded);
+    stbi_image_free(imageData);
 }
 
 TeaPacket::Graphics::Texture::~Texture() {

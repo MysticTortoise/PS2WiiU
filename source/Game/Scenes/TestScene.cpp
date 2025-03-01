@@ -6,8 +6,8 @@
 using namespace TeaPacket;
 
 void PostShift2::TestScene::Load(){
-    testTex1 = new Graphics::Texture("test.png", TeaPacket::Graphics::TEXTURE_FILTER_POINT);
-    testTex2 = new Graphics::Texture("test2.png");
+    testTex1 = Graphics::Texture::LoadFromFile("test.png", TeaPacket::Graphics::TEXTURE_FILTER_POINT);
+    testTex2 = Graphics::Texture::LoadFromFile("test2.png");
 
     sprite1.texture = testTex1;
     sprite2.texture = testTex2;
