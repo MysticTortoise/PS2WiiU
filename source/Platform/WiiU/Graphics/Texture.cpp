@@ -36,12 +36,13 @@ namespace {
     }
 }
 
-TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType) :
+TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, unsigned int height, TextureFormat format, TextureFilterType filterType) :
+    width(width),
+    height(height),
     platformTexture(new PlatformTexture()),
-    filterType(filterType)
+    filterType(filterType),
+    format(format)
 {
-    int channelCount;
-    uint8_t* imageData = stbi_load_from_memory(data, dataSize, &width, &height, &channelCount, 4);
     GX2Texture* texture = new GX2Texture();
 
     texture->surface.width = width;
@@ -67,7 +68,7 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, Text
     for (int y = 0; y < height; y++) {
         size_t offset = y * texture->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)texture->surface.image + offset;
-        memcpy(firstPixel, (imageData + widthSizeInBytes * y), widthSizeInBytes);
+        memcpy(firstPixel, (data + widthSizeInBytes * y), widthSizeInBytes);
     }
 
     GX2Sampler* sampler = new GX2Sampler();
@@ -75,8 +76,6 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, Text
 
     platformTexture->gx2Tex = texture;
     platformTexture->gx2Sampler = sampler;
-
-    stbi_image_free(imageData);
 }
 
 TeaPacket::Graphics::Texture::~Texture() {

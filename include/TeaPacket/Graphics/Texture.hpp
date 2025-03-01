@@ -17,8 +17,8 @@ namespace TeaPacket::Graphics
     class Texture{
         public:
         
-        int width;
-        int height;
+        unsigned int width;
+        unsigned int height;
         PlatformTexture* platformTexture;
 
         private:
@@ -26,7 +26,7 @@ namespace TeaPacket::Graphics
         TextureFormat format = TEXTURE_FORMAT_RGBA8;
         public:
 
-        Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
+        Texture(unsigned char* data, unsigned int width, unsigned int height, TextureFormat = TEXTURE_FORMAT_RGBA8, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
         ~Texture();
 
         public:

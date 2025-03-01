@@ -52,9 +52,12 @@ namespace {
     }
 }
 
-TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, TextureFilterType filterType) :
+TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, unsigned int height, TextureFormat format, TextureFilterType filterType) :
+    width(width),
+    height(height),
     platformTexture(new PlatformTexture()),
-    filterType(filterType)
+    filterType(filterType),
+    format(format)
 {
     // Generate Texture
     unsigned int handle;
@@ -68,13 +71,12 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, Text
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter.magFilter);
     // Load IMG
     int channelCount;
-    unsigned char* imageData = stbi_load_from_memory(data, dataSize, &width, &height, &channelCount, STBI_rgb_alpha);
     // TODO: Format
     format = TEXTURE_FORMAT_RGBA8;
     GLFormat glFormat = GetGLFormatFromTPFormat(format);
     // Send data
-    if (imageData) {
-        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, imageData);
+    if (data) {
+        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
         glGenerateMipmap(GL_TEXTURE_2D);
     }
     else {
@@ -82,7 +84,6 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, size_t dataSize, Text
         Print(stbi_failure_reason());
     }
     // Delete no longer necessary data
-    stbi_image_free(imageData);
     // Setup platformTexture
     platformTexture->handle = handle;
 }
