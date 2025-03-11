@@ -8,6 +8,8 @@
 #include "GLFW/glfw3.h"
 #include "stb/stb_image.h"
 
+#include "string.h"
+
 using namespace TeaPacket::Graphics;
 
 namespace {
@@ -73,14 +75,14 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     format = TEXTURE_FORMAT_RGBA8;
     GLFormat glFormat = GetGLFormatFromTPFormat(format);
     // Send data
-    if (data) {
-        glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
-        glGenerateMipmap(GL_TEXTURE_2D);
+    if (!data) {
+        data = (unsigned char*)malloc(width * height * 4);
+        for(unsigned int i = 0; i < width * height; i++){
+            data[i*4+3] = 255;
+        }
     }
-    else {
-        TeaPacket::Print("Failed to load texture.");
-        Print(stbi_failure_reason());
-    }
+    glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
     // Delete no longer necessary data
     // Setup platformTexture
     platformTexture->handle = handle;
