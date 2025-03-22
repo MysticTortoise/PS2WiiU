@@ -2,9 +2,13 @@
 #include "TeaPacket/Logging.hpp"
 
 #include <iostream>
+#include <fstream>
+
+static std::ofstream dump("log.txt");
 
 void TeaPacket::PrintString(std::string val) {
-    std::cout << val << std::endl;
+    std::cout << val;
+    dump << val;
 }
 
 int TeaPacket::LogInit()  {return 1;}

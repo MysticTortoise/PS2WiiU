@@ -33,3 +33,6 @@
 
 build/
 openmsys.bat
+
+# Exclude FFMPEG binaries
+!libraries/Windows/FFmpeg/bin/*

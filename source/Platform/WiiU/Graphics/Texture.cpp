@@ -64,6 +64,12 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     GX2InitTextureRegs(texture);
     texture->surface.image = MEMAllocFromDefaultHeapEx(texture->surface.imageSize, texture->surface.alignment);
 
+    if (!data) {
+        data = (unsigned char*)malloc(width * height * 4);
+        for(unsigned int i = 0; i < width * height; i++){
+            data[i*4+3] = 255;
+        }
+    }
     size_t widthSizeInBytes = (sizeof(char) * 4 * width);
     for (unsigned int y = 0; y < height; y++) {
         size_t offset = y * texture->surface.pitch;

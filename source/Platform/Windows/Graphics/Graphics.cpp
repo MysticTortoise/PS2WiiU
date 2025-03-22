@@ -20,14 +20,14 @@ int TeaPacket::Graphics::Init(){
 
     TeaPacket::Video::window = glfwCreateWindow(TeaPacket::Video::resolutionWidth, TeaPacket::Video::resolutionHeight, TeaPacket::Video::windowTitle, NULL, NULL);
     if(TeaPacket::Video::window == NULL){
-        TeaPacket::Print("ERROR! Failed to create window!");
+        TeaPacket::PrintLine("ERROR! Failed to create window!");
         return -1;
     }
 
     glfwMakeContextCurrent(TeaPacket::Video::window);
 
     if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)){
-        TeaPacket::Print("ERROR! Failed to initialize GLAD!");
+        TeaPacket::PrintLine("ERROR! Failed to initialize GLAD!");
         return -1;
     }
     return 1;

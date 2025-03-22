@@ -3,6 +3,7 @@
 #include <filesystem>
 
 #include <romfs-wiiu.h>
+#include <whb/file.h>
 
 int TeaPacket::Files::Init(){
     romfsInit();

@@ -21,13 +21,13 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
     std::string vertexShaderCode = Files::ReadTextFile(vertexShaderPath);
     GX2VertexShader* vertexShader = GLSL_CompileVertexShader(vertexShaderCode.c_str(), infoLog, sizeof(infoLog), GLSL_COMPILER_FLAG_NONE);
     if(!vertexShader){
-        TeaPacket::Print("ERROR: Failed to compile vertex shader! Info Log:" + std::string(infoLog));
+        TeaPacket::PrintLine("ERROR: Failed to compile vertex shader! Info Log:" + std::string(infoLog));
     }
 
     std::string fragmentShaderCode = Files::ReadTextFile(fragmentShaderPath);
     GX2PixelShader* pixelShader = GLSL_CompilePixelShader(fragmentShaderCode.c_str(), infoLog, sizeof(infoLog), GLSL_COMPILER_FLAG_NONE);
     if(!pixelShader){
-        TeaPacket::Print("ERROR: Failed to compile fragment shader! Info Log:" + std::string(infoLog));
+        TeaPacket::PrintLine("ERROR: Failed to compile fragment shader! Info Log:" + std::string(infoLog));
     }
 
     GX2Invalidate(GX2_INVALIDATE_MODE_CPU_SHADER, vertexShader->program, vertexShader->size);

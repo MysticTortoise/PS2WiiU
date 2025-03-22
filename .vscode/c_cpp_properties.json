@@ -8,12 +8,13 @@
                 "C:/devkitPro/portlibs",
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/include/Platform",
-
+                // Common Libs
                 "${workspaceFolder}/libraries/common/glm",
-                
+                "${workspaceFolder}/libraries/build/Windows/ffmpeg/include",
+                // Windows Libs
                 "${workspaceFolder}/libraries/windows/glfw/include",
                 "${workspaceFolder}/libraries/windows/glad/include",
-
+                // Wii U libs
                 "${workspaceFolder}/libraries/wiiu"
             ],
             "defines": [

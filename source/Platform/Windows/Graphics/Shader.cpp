@@ -26,7 +26,7 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
     if(!success){
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        TeaPacket::Print("Vertex shader " + std::string(vertexShaderPath) + " failed to compile! Error Log: " + infoLog);
+        TeaPacket::PrintLine("Vertex shader " + std::string(vertexShaderPath) + " failed to compile! Error Log: " + infoLog);
     }
     #endif
     std::string fragmentShaderString = Files::ReadTextFile(fragmentShaderPath);
@@ -39,7 +39,7 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
     if(!success){
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        TeaPacket::Print("Fragment shader " + std::string(fragmentShaderPath) + " failed to compile! Error Log: " + infoLog);
+        TeaPacket::PrintLine("Fragment shader " + std::string(fragmentShaderPath) + " failed to compile! Error Log: " + infoLog);
     }
     #endif
 
@@ -52,7 +52,7 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
     glGetProgramiv(program, GL_LINK_STATUS, &success);
     if(!success){
         glGetProgramInfoLog(program, 512, NULL, infoLog);
-        TeaPacket::Print("Program built by " + std::string(vertexShaderPath) + " and " + std::string(fragmentShaderPath) + " failed to link! Error Log: " + infoLog);
+        TeaPacket::PrintLine("Program built by " + std::string(vertexShaderPath) + " and " + std::string(fragmentShaderPath) + " failed to link! Error Log: " + infoLog);
     }
     #endif
     glDeleteShader(vertexShader);

@@ -3,6 +3,7 @@ import os
 import subprocess
 
 
+
 os.system("cls")
 os.system("clear")
 parser = argparse.ArgumentParser()
@@ -10,7 +11,6 @@ parser.add_argument("platform", help="The platform you want to build for")
 parser.add_argument("--twoscreen", help="Enables dual screen mode. Only works on some platforms.", action="store_true")
 parser.add_argument("--launch_after_compile", help="Launches the game after compiling", action="store_true")
 args = parser.parse_args()
-
 
 compileDefines = []
 

@@ -1,0 +1,225 @@
+[20:49:52.962] ------- Init Cemu 2.6 -------
+[20:49:52.962] Init Wii U memory space (base: 0x00000287e86a0000)
+[20:49:52.962] mlc01 path: D:/Downloads/Cemu_2.0-36/mlc01
+[20:49:52.962] CPU: AMD Ryzen 9 6900HS with Radeon Graphics        
+[20:49:52.962] RAM: 15608MB
+[20:49:52.962] Platform: Windows 10 Home (Build 9200)
+[20:49:52.962] Used CPU extensions: SSSE3, SSE4.1, AVX, AVX2, LZCNT, MOVBE, BMI2, AES-NI, INVARIANT-TSC
+[20:49:52.966] IOSU_CRYPTO: No otp.bin found. Online mode cannot be used
+[20:49:52.967] IOSU_CRYPTO: No Seeprom.bin found. Online mode cannot be used
+[20:50:05.671] Launching executable in standalone mode due to incorrect layout or missing meta files
+[20:50:05.683] Generated placeholder TitleId: ffffffffb2f67abf
+[20:50:05.695] COS: System fonts found. Generated shareddata (26609KB)
+[20:50:05.703] Recompiler initialized
+[20:50:05.846] RPLLoader: Section 11 uncompresses to 32 bytes but sectionSize is 44
+[20:50:05.929] ------- Init Vulkan graphics backend -------
+[20:50:06.012] Vulkan instance version: 1.4
+[20:50:06.146] Using GPU: NVIDIA GeForce RTX 3060 Laptop GPU
+[20:50:06.146] Driver version: 572.16
+[20:50:06.146] Vulkan: present_wait extension: supported
+[20:50:06.146] VulkanLimits: UBAlignment 64 nonCoherentAtomSize 64
+[20:50:06.207] Using available debug function: vkCreateDebugUtilsMessengerEXT()
+[20:50:06.207] Vulkan device memory info:
+[20:50:06.207] Heap 0 - Size 5996MB Flags 0x00000001
+[20:50:06.207] Heap 1 - Size 7804MB Flags 0x00000000
+[20:50:06.207] Memory 0 - HeapIndex 1 Flags 0x00000000
+[20:50:06.207] Memory 1 - HeapIndex 0 Flags 0x00000001
+[20:50:06.207] Memory 2 - HeapIndex 0 Flags 0x00000001
+[20:50:06.207] Memory 3 - HeapIndex 1 Flags 0x00000006
+[20:50:06.207] Memory 4 - HeapIndex 1 Flags 0x0000000e
+[20:50:06.207] Memory 5 - HeapIndex 0 Flags 0x00000007
+[20:50:06.496] ------- Loaded title -------
+[20:50:06.496] TitleId: ffffffff-b2f67abf
+[20:50:06.496] TitleVersion: v0
+[20:50:06.496] TitleRegion: US
+[20:50:06.496] Save path:   D:/Downloads/Cemu_2.0-36/mlc01/usr/save/FFFFFFFF/B2F67ABF/user/ (not present)
+[20:50:06.496] Shader cache file: shaderCache/transferable/ffffffffb2f67abf.bin
+[20:50:06.496] gameprofile path:  (not present)
+[20:50:06.496] RPX hash (updated): b2f67abf
+[20:50:06.496] RPX hash (base): b2f67abf
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 1022:161f
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 1022:15d6
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 1022:161e
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 0781:55ae
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 1022:15d7
+[20:50:06.522] nsyshid::BackendLibusb: device not on whitelist: 0b05:19b6
+[20:50:06.523] nsyshid::BackendLibusb: device not on whitelist: 13d3:3568
+[20:50:06.523] nsyshid::BackendLibusb: device not on whitelist: 13d3:56eb
+[20:50:06.523] nsyshid::BackendLibusb: device not on whitelist: 1022:161d
+[20:50:06.523] nsyshid::BackendLibusb: device not on whitelist: 3554:fc03
+[20:50:06.523] nsyshid::BackendLibusb: device not on whitelist: 001f:0b21
+[20:50:06.563] Loaded module 'crossshift2' with checksum 0xcd67db9e
+[20:50:06.563] RPL link time: 31ms
+[20:50:06.616] HLE scan time: 62ms
+[20:50:06.616] ------- Active settings -------
+[20:50:06.616] CPU-Mode: 3
+[20:50:06.616] Load shared libraries: true
+[20:50:06.616] Use precompiled shaders: 0
+[20:50:06.616] Full sync at GX2DrawDone: true
+[20:50:06.616] Strict shader mul: true
+[20:50:06.616] Async compile: true
+[20:50:06.616] Console language: 1
+[20:50:06.760] ------- Activate graphic packs -------
+[20:50:06.760] ------- Init Audio backend -------
+[20:50:06.760] DirectSound: available
+[20:50:06.760] XAudio 2.8: available
+[20:50:06.760] Cubeb: available
+[20:50:06.760] ------- Init Audio input backend -------
+[20:50:06.760] Cubeb: available
+[20:50:06.760] ------- Run title -------
+[20:50:06.873] Shader cache loaded with 0 shaders. Commited mem 0MB. Took 2ms
+[20:50:07.121] Unsupported lib call: nsysnet.set_multicast_state
+[20:50:07.124] Loading RPL: /cafeLibs/glslcompiler.rpl
+[20:50:07.280] Loaded module 'glslcompiler' with checksum 0x7f13baab
+[20:50:07.394] gx2.GX2Init(0xe2012e0) # LR: 0x2e13018 | Thread: 0xe000700
+[20:50:07.394] GX2Init() on core 1 by thread 0x0e000700
+[20:50:07.394] gx2.GX2GetSystemDRCMode() # LR: 0x2e1301c | Thread: 0xe000700
+[20:50:07.394] 		gx2.GX2GetSystemDRCMode -> 1
+[20:50:07.394] gx2.GX2CalcSurfaceSizeAndAlignment(0x11e6fc64) # LR: 0x2e130dc | Thread: 0xe000700
+[20:50:07.394] GX2InitColorBufferRegs(0x11e6fc64)
+[20:50:07.394] gx2.GX2CalcSurfaceSizeAndAlignment(0x11e6fbb8) # LR: 0x2e13144 | Thread: 0xe000700
+[20:50:07.394] GX2InitDepthBufferRegs(0x11e6fbb8)
+[20:50:07.394] gx2.GX2CalcSurfaceSizeAndAlignment(0x11e6fb1c) # LR: 0x2e131c0 | Thread: 0xe000700
+[20:50:07.394] GX2InitColorBufferRegs(0x11e6fb1c)
+[20:50:07.394] gx2.GX2CalcSurfaceSizeAndAlignment(0x11e6fa70) # LR: 0x2e13220 | Thread: 0xe000700
+[20:50:07.394] GX2InitDepthBufferRegs(0x11e6fa70)
+[20:50:07.394] coreinit.MEMGetBaseHeapHandle(0) # LR: 0x2e13e94 | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMGetBaseHeapHandle -> 4093640704
+[20:50:07.394] coreinit.MEMRecordStateForFrmHeap(0xf4000000, 306048175) # LR: 0x2e13ea4 | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMRecordStateForFrmHeap -> true
+[20:50:07.394] coreinit.MEMGetAllocatableSizeForFrmHeapEx(0xf4000000, 4) # LR: 0x2e13ebc | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMGetAllocatableSizeForFrmHeapEx -> 33554340
+[20:50:07.394] coreinit.MEMAllocFromFrmHeapEx(0xf4000000, 33554340, 4) # LR: 0x2e13ed4 | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMAllocFromFrmHeapEx -> 4093640796
+[20:50:07.394] coreinit.MEMGetBaseHeapHandle(8) # LR: 0x2e140c0 | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMGetBaseHeapHandle -> 3758096384
+[20:50:07.394] coreinit.MEMGetAllocatableSizeForFrmHeapEx(0xe0000000, 4) # LR: 0x2e140cc | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMGetAllocatableSizeForFrmHeapEx -> 41942964
+[20:50:07.394] coreinit.MEMAllocFromFrmHeapEx(0xe0000000, 41942964, 4) # LR: 0x2e140e4 | Thread: 0xe000700
+[20:50:07.394] 		coreinit.MEMAllocFromFrmHeapEx -> 3758096460
+[20:50:07.394] gx2.GX2Invalidate(64, 3758100480, 16711680) # LR: 0x2e12c80 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2SetTVBuffer(0xe0001000, 16711680, 5, 26, 2) # LR: 0x2e12ca8 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2Invalidate(64, 4093642752, 8355840) # LR: 0x2e12cd8 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2Invalidate(64, 4102000640, 8355840) # LR: 0x2e12d08 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2Invalidate(64, 3774816256, 3317760) # LR: 0x2e12d30 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2Invalidate(64, 4110358528, 1658880) # LR: 0x2e12d88 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2Invalidate(64, 4112019456, 1658880) # LR: 0x2e12db0 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2RSetAllocator(48311280, 48310980) # LR: 0x2e1324c | Thread: 0xe000700
+[20:50:07.396] GX2SetupContextStateEx(0x13233900)
+[20:50:07.396] GX2SetContextState(0x13233900)
+[20:50:07.396] GX2SetColorBuffer(0x11e6fc64, 0)
+[20:50:07.396] GX2SetDepthBuffer(0x11e6fbb8)
+[20:50:07.396] DepthBuffer tileMode 4 PhysAddr f47f9000 fmt 080e res 1920x1080
+[20:50:07.396] gx2.GX2SetViewport(0, 0, 1920, 1080, 0, 1) # LR: 0x2e13318 | Thread: 0xe000700
+[20:50:07.396] gx2.GX2SetScissor(0, 0, 1920, 1080) # LR: 0x2e1339c | Thread: 0xe000700
+[20:50:07.396] Unsupported lib call: gx2.GX2SetTVScale
+[20:50:07.396] GX2SetupContextStateEx(0x1323db00)
+[20:50:07.397] GX2SetContextState(0x1323db00)
+[20:50:07.397] GX2SetColorBuffer(0x11e6fb1c, 0)
+[20:50:07.397] GX2SetDepthBuffer(0x11e6fa70)
+[20:50:07.397] DepthBuffer tileMode 4 PhysAddr f5187000 fmt 080e res 854x480
+[20:50:07.397] gx2.GX2SetViewport(0, 0, 854, 480, 0, 1) # LR: 0x2e134b0 | Thread: 0xe000700
+[20:50:07.397] gx2.GX2SetScissor(0, 0, 854, 480) # LR: 0x2e13534 | Thread: 0xe000700
+[20:50:07.397] GX2SetDRCScale(854,480)
+[20:50:07.397] GX2SetSwapInterval(1)
+[20:50:07.450] gx2.GX2Invalidate(72, 321195776, 288) # LR: 0x2eb287c | Thread: 0xe000700
+[20:50:07.462] gx2.GX2Invalidate(72, 321330176, 80) # LR: 0x2eb29f0 | Thread: 0xe000700
+[20:50:07.462] gx2.GX2Invalidate(72, 321195776, 288) # LR: 0x207101c | Thread: 0xe000700
+[20:50:07.462] gx2.GX2Invalidate(72, 321330176, 80) # LR: 0x207102c | Thread: 0xe000700
+[20:50:07.462] gx2.GX2CalcFetchShaderSizeEx(2, 0, 0) # LR: 0x2e145d8 | Thread: 0xe000700
+[20:50:07.462] 		gx2.GX2CalcFetchShaderSizeEx -> 48
+[20:50:07.462] gx2.GX2InitFetchShaderEx(0x13271d80, 0x13272000, 2, 0x13271db0, 0, 0) # LR: 0x2e14604 | Thread: 0xe000700
+[20:50:07.462] gx2.GX2Invalidate(72, 321331200, 48) # LR: 0x2e14614 | Thread: 0xe000700
+[20:50:07.462] gx2.GX2RCreateBuffer(0x1084f250) # LR: 0x207148c | Thread: 0xe000700
+[20:50:07.462] 		gx2.GX2RCreateBuffer -> true
+[20:50:07.462] gx2.GX2RLockBufferEx(0x1084f250, 0) # LR: 0x2071498 | Thread: 0xe000700
+[20:50:07.462] 		gx2.GX2RLockBufferEx -> 321331328
+[20:50:07.462] gx2.GX2RUnlockBufferEx(0x1084f250, 0) # LR: 0x20714bc | Thread: 0xe000700
+[20:50:07.462] gx2.GX2RCreateBuffer(0x1084f240) # LR: 0x20714d8 | Thread: 0xe000700
+[20:50:07.462] 		gx2.GX2RCreateBuffer -> true
+[20:50:07.462] gx2.GX2RLockBufferEx(0x1084f240, 0) # LR: 0x20714e4 | Thread: 0xe000700
+[20:50:07.462] 		gx2.GX2RLockBufferEx -> 321331456
+[20:50:07.462] gx2.GX2RUnlockBufferEx(0x1084f240, 0) # LR: 0x2071508 | Thread: 0xe000700
+[20:50:07.462] [OSConsole] 26
+[20:50:07.462] [OSConsole] PROBE INPUT
+[20:50:07.463] [OSConsole] OPEN INPUT
+[20:50:07.463] [OSConsole] Probing h263 score:25 size:2048
+[20:50:07.464] [OSConsole] Probing matroska,webm score:100 size:2048
+[20:50:07.464] [OSConsole] Probing mp3 score:1 size:2048
+[20:50:07.465] [OSConsole] Format matroska,webm probed with size=2048 and score=100
+[20:50:07.466] [OSConsole] st:0 removing common factor 1000000 from timebase
+[20:50:07.466] [OSConsole] st:1 removing common factor 1000000 from timebase
+[20:50:07.466] [OSConsole] FIND STREAM INPUT
+[20:50:07.466] [OSConsole] Before avformat_find_stream_info() pos: 958 bytes read:2048 seeks:0 nb_streams:2
+[20:50:07.467] [OSConsole] For transform of length 120, inverse, mdct_float, flags: [aligned, out_of_place], found 5 matches:
+[20:50:07.467] [OSConsole]     1: mdct_pfa_15xM_inv_float_c - type: mdct_float, len: [30, ∞], factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only], prio: 304
+[20:50:07.467] [OSConsole]     2: mdct_pfa_5xM_inv_float_c - type: mdct_float, len: [10, ∞], factors[2]: [5, any], flags: [unaligned, out_of_place, inv_only], prio: 144
+[20:50:07.467] [OSConsole]     3: mdct_pfa_3xM_inv_float_c - type: mdct_float, len: [6, ∞], factors[2]: [3, any], flags: [unaligned, out_of_place, inv_only], prio: 112
+[20:50:07.467] [OSConsole]     4: mdct_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: 96
+[20:50:07.467] [OSConsole]     5: mdct_naive_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: -130976
+[20:50:07.467] [OSConsole] For transform of length 4, inverse, fft_float, flags: [aligned, inplace, preshuf], found 1 matches:
+[20:50:07.467] [OSConsole]     1: fft4_ns_float_c - type: fft_float, len: 4, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf], prio: 96
+[20:50:07.467] [OSConsole] Transform tree:
+[20:50:07.467] [OSConsole]     mdct_pfa_15xM_inv_float_c - type: mdct_float, len: 120, factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only]
+[20:50:07.468] [OSConsole]         fft4_ns_float_c - type: fft_float, len: 4, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf]
+[20:50:07.468] [OSConsole] For transform of length 240, inverse, mdct_float, flags: [aligned, out_of_place], found 5 matches:
+[20:50:07.468] [OSConsole]     1: mdct_pfa_15xM_inv_float_c - type: mdct_float, len: [30, ∞], factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only], prio: 304
+[20:50:07.468] [OSConsole]     2: mdct_pfa_5xM_inv_float_c - type: mdct_float, len: [10, ∞], factors[2]: [5, any], flags: [unaligned, out_of_place, inv_only], prio: 144
+[20:50:07.468] [OSConsole]     3: mdct_pfa_3xM_inv_float_c - type: mdct_float, len: [6, ∞], factors[2]: [3, any], flags: [unaligned, out_of_place, inv_only], prio: 112
+[20:50:07.468] [OSConsole]     4: mdct_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: 96
+[20:50:07.468] [OSConsole]     5: mdct_naive_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: -130976
+[20:50:07.468] [OSConsole] For transform of length 8, inverse, fft_float, flags: [aligned, inplace, preshuf], found 2 matches:
+[20:50:07.468] [OSConsole]     1: fft_pfa_ns_float_c - type: fft_float, len: [6, ∞], factors[2]: [7, 5, 3, 2, any], flags: [unaligned, inplace, out_of_place, preshuf], prio: 112
+[20:50:07.468] [OSConsole]     2: fft8_ns_float_c - type: fft_float, len: 8, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf], prio: 96
+[20:50:07.468] [OSConsole] Transform tree:
+[20:50:07.468] [OSConsole]     mdct_pfa_15xM_inv_float_c - type: mdct_float, len: 240, factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only]
+[20:50:07.468] [OSConsole]         fft8_ns_float_c - type: fft_float, len: 8, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf]
+[20:50:07.468] [OSConsole] For transform of length 480, inverse, mdct_float, flags: [aligned, out_of_place], found 5 matches:
+[20:50:07.468] [OSConsole]     1: mdct_pfa_15xM_inv_float_c - type: mdct_float, len: [30, ∞], factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only], prio: 304
+[20:50:07.468] [OSConsole]     2: mdct_pfa_5xM_inv_float_c - type: mdct_float, len: [10, ∞], factors[2]: [5, any], flags: [unaligned, out_of_place, inv_only], prio: 144
+[20:50:07.468] [OSConsole]     3: mdct_pfa_3xM_inv_float_c - type: mdct_float, len: [6, ∞], factors[2]: [3, any], flags: [unaligned, out_of_place, inv_only], prio: 112
+[20:50:07.468] [OSConsole]     4: mdct_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: 96
+[20:50:07.468] [OSConsole]     5: mdct_naive_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: -130976
+[20:50:07.468] [OSConsole] For transform of length 16, inverse, fft_float, flags: [aligned, inplace, preshuf], found 2 matches:
+[20:50:07.468] [OSConsole]     1: fft_pfa_ns_float_c - type: fft_float, len: [6, ∞], factors[2]: [7, 5, 3, 2, any], flags: [unaligned, inplace, out_of_place, preshuf], prio: 112
+[20:50:07.468] [OSConsole]     2: fft16_ns_float_c - type: fft_float, len: 16, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf], prio: 96
+[20:50:07.469] [OSConsole] Transform tree:
+[20:50:07.469] [OSConsole]     mdct_pfa_15xM_inv_float_c - type: mdct_float, len: 480, factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only]
+[20:50:07.469] [OSConsole]         fft16_ns_float_c - type: fft_float, len: 16, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf]
+[20:50:07.469] [OSConsole] For transform of length 960, inverse, mdct_float, flags: [aligned, out_of_place], found 5 matches:
+[20:50:07.469] [OSConsole]     1: mdct_pfa_15xM_inv_float_c - type: mdct_float, len: [30, ∞], factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only], prio: 304
+[20:50:07.469] [OSConsole]     2: mdct_pfa_5xM_inv_float_c - type: mdct_float, len: [10, ∞], factors[2]: [5, any], flags: [unaligned, out_of_place, inv_only], prio: 144
+[20:50:07.469] [OSConsole]     3: mdct_pfa_3xM_inv_float_c - type: mdct_float, len: [6, ∞], factors[2]: [3, any], flags: [unaligned, out_of_place, inv_only], prio: 112
+[20:50:07.469] [OSConsole]     4: mdct_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: 96
+[20:50:07.469] [OSConsole]     5: mdct_naive_inv_float_c - type: mdct_float, len: [2, ∞], factors[2]: [2, any], flags: [unaligned, out_of_place, inv_only], prio: -130976
+[20:50:07.472] [OSConsole] For transform of length 32, inverse, fft_float, flags: [aligned, inplace, preshuf], found 2 matches:
+[20:50:07.472] [OSConsole]     1: fft_pfa_ns_float_c - type: fft_float, len: [6, ∞], factors[2]: [7, 5, 3, 2, any], flags: [unaligned, inplace, out_of_place, preshuf], prio: 112
+[20:50:07.472] [OSConsole]     2: fft32_ns_float_c - type: fft_float, len: 32, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf], prio: 96
+[20:50:07.473] [OSConsole] Transform tree:
+[20:50:07.473] [OSConsole]     mdct_pfa_15xM_inv_float_c - type: mdct_float, len: 960, factors[2]: [15, any], flags: [unaligned, out_of_place, inv_only]
+[20:50:07.473] [OSConsole]         fft32_ns_float_c - type: fft_float, len: 32, factor: 2, flags: [unaligned, inplace, out_of_place, preshuf]
+[20:50:07.473] [OSConsole] Format yuv420p chosen by get_format().
+[20:50:49.524] OSResumeThread: Resuming thread 0x0e000700 which isn't suspended
+[20:52:33.430] Dumping stack trace for thread 0e000700 LR: 025f219c
+[20:52:33.430] Trace starting at SP/r1 0e1fe758
+[20:52:33.430] SP 0e1fe878 ReturnAddr 025f1c34   (crossshift2.ff_opus_parse_packet+0x1d30)
+[20:52:33.430] SP 0e1fe998 ReturnAddr 025f1c34   (crossshift2.ff_opus_parse_packet+0x1d30)
+[20:52:33.430] SP 0e1feab8 ReturnAddr 025f1130   (crossshift2.ff_opus_parse_packet+0x122c)
+[20:52:33.430] SP 0e1febd8 ReturnAddr 025f1bac   (crossshift2.ff_opus_parse_packet+0x1ca8)
+[20:52:33.430] SP 0e1fecf8 ReturnAddr 02c89f9c   (crossshift2.ff_celt_quant_bands+0x458)
+[20:52:33.431] SP 0e200968 ReturnAddr 025e9afc   (crossshift2.ff_celt_decode_frame+0x908)
+[20:52:33.431] SP 0e200ae8 ReturnAddr 025e7fe4   (crossshift2.avcodec_get_subtitle_rect_class+0x808)
+[20:52:33.431] SP 0e200c10 ReturnAddr 02350078   (crossshift2.ff_decode_receive_frame_internal+0x198)
+[20:52:33.431] SP 0e200c50 ReturnAddr 02350534   (crossshift2.ff_decode_receive_frame_internal+0x654)
+[20:52:33.431] SP 0e200c68 ReturnAddr 02350904   (crossshift2.avcodec_send_packet+0x124)
+[20:52:33.431] SP 0e200c80 ReturnAddr 02086e94   (crossshift2.ffio_close_null_buf+0x2a38)
+[20:52:33.431] SP 0e200ce8 ReturnAddr 0208da1c   (crossshift2.avformat_find_stream_info+0x930)
+[20:52:33.432] SP 0e200f68 ReturnAddr 02073c48   (crossshift2._ZN9TeaPacket8Graphics11VideoPlayerC1ENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEEPNS0_7TextureE+0x378)
+[20:52:33.432] SP 0e2013d8 ReturnAddr 02070a00   (crossshift2._ZN10PostShift29VideoTest4LoadEv+0x74)
+[20:52:33.432] SP 0e201410 ReturnAddr 02074fa4   (crossshift2._ZN9TeaPacket10InitializeEv+0x64)
+[20:52:33.432] SP 0e201420 ReturnAddr 02070014   (crossshift2.main+0x14)
+[20:52:33.432] SP 0e201428 ReturnAddr 02000048
+[20:52:33.432] SP 0e201438 ReturnAddr 00e00004
+[21:04:12.386] --- Thread 0e000700 profile results with 32350 samples captured ---
+[21:04:12.386] Exclusive time, grouped by function:
+[21:04:12.387] [025eff04]   100.00% (Samples: 32350) Symbol: crossshift2.ff_opus_parse_packet+0x0
