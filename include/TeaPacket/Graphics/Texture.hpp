@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstddef>
+#include <unordered_map>
 
 namespace TeaPacket::Graphics
 {
@@ -11,7 +12,8 @@ namespace TeaPacket::Graphics
 
     enum TextureFormat{
         TEXTURE_FORMAT_RGBA8,
-    };
+        TEXTURE_FORMAT_NV12
+    };    
 
     class PlatformTexture;
     class Texture{
@@ -34,6 +36,9 @@ namespace TeaPacket::Graphics
 
         public:
         static Texture* LoadFromFile(const char* path, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
+
+
+        static unsigned int GetMemSizeOfTextureFormat(TextureFormat format, unsigned int width, unsigned int height);
 
     };
 } // namespace TeaPacket::Graphics

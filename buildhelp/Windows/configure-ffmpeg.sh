@@ -1,6 +1,6 @@
 cd ../../
 dir=$PWD
-cd libraries/Common/ffmpeg
+cd libraries/Windows/ffmpeg
 echo "Configuring FFmpeg for Windows"
 
 ffmpegBuildDir=$dir"/libraries/build/Windows/ffmpeg"
@@ -11,6 +11,6 @@ ffmpegBuildDir=$dir"/libraries/build/Windows/ffmpeg"
 --disable-network \
 --disable-doc \
 --disable-programs 
-make
+make -j16
 make install
 make clean

@@ -69,20 +69,19 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     // Set Filter Params
     GLFilter filter = GetGLFilterFromTPFilter(filterType);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter.minFilter);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, filter.magFilter);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter.magFilter);
     // TODO: Format
     format = TEXTURE_FORMAT_RGBA8;
     GLFormat glFormat = GetGLFormatFromTPFormat(format);
     // Send data
     if (!data) {
-        data = (unsigned char*)malloc(width * height * 4);
-        for(unsigned int i = 0; i < width * height; i++){
-            data[i*4+3] = 255;
-        }
+        data = (unsigned char*)malloc(GetMemSizeOfTextureFormat(format, width, height));
+        memset(data, 0, GetMemSizeOfTextureFormat(format, width, height));
     }
     glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, width, height, 0, glFormat.channelType, glFormat.bitDepth, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_AUTO_GENERATE_MIPMAP, GL_FALSE);
+    //glGenerateMipmap(GL_TEXTURE_2D);
     // Delete no longer necessary data
     // Setup platformTexture
     platformTexture->handle = handle;
@@ -94,11 +93,13 @@ TeaPacket::Graphics::Texture::~Texture() {
     delete platformTexture;
 }
 
+#include "TeaPacket/Time.hpp"
+
 bool TeaPacket::Graphics::Texture::UpdateContents(unsigned char* data){
     glBindTexture(GL_TEXTURE_2D, platformTexture->handle);
     GLFormat glFormat = GetGLFormatFromTPFormat(this->format);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, glFormat.channelType, glFormat.bitDepth, data);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    //glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
     return true;
 }

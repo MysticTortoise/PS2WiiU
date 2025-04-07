@@ -23,7 +23,8 @@
                 "_UNICODE",
                 "TP_WIN",
                 "TP_WIIU",
-                "TP_DEBUG"
+                "TP_DEBUG",
+                "VSCODE"
             ],
             "windowsSdkVersion": "10.0.22000.0",
             "compilerPath": "cl.exe",

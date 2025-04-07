@@ -48,41 +48,25 @@ target_include_directories(CrossShift2 PRIVATE
 # FFMPEG
 set(ENV{PKG_CONFIG_PATH} "${BUILT_LIBS_DIR}/ffmpeg/lib/pkgconfig")
 find_package(PkgConfig REQUIRED)
-#message(${PKG_CONFIG_EXECUTABLE})
-pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
-    libavdevice
-    libavfilter
-    libavformat
-    libavcodec
-    libswresample
-    libswscale
-    libavutil
-)
-#message(${LIBAV_LINK_LIBRARIES})
 
-target_link_libraries(CrossShift2 PkgConfig::LIBAV)
 
-#set(CMAKE_FIND_LIBRARY_SUFFIXES .a ${CMAKE_FIND_LIBRARY_SUFFIXES})
-
-#target_include_directories(CrossShift2 PRIVATE
-#  ${BUILT_LIBS_DIR}/ffmpeg/include
-#)
-
-#target_link_libraries(CrossShift2 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libavdevice.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libavfilter.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libavformat.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libavcodec.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libswresample.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libswscale.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libavutil.a 
-#   ${BUILT_LIBS_DIR}/ffmpeg/lib/libswresample.a 
-#)
-# NO MORE FFMPEG
 
 target_compile_options(${PROJECT_NAME} PRIVATE -Wall)
 
 if(PLATFORM_WINDOWS)
+   pkg_check_modules(LIBAV REQUIRED IMPORTED_TARGET
+      libavdevice
+      libavfilter
+      libavformat
+      libavcodec
+      libswresample
+      libswscale
+      libavutil
+   )
+   #message(${LIBAV_LINK_LIBRARIES})
+
+   target_link_libraries(CrossShift2 PkgConfig::LIBAV)
+
    target_include_directories(CrossShift2 PRIVATE
    libraries/Windows/FFmpeg/include
    )

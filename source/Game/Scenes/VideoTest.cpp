@@ -6,18 +6,12 @@
 using namespace TeaPacket;
 using namespace TeaPacket::Graphics;
 
-extern "C"{
-    #include <libavformat/avformat.h>
-    #include <libavcodec/avcodec.h>
-    #include <libavutil/imgutils.h>
-    #include <libswscale/swscale.h>
-}
-
 
 
 void PostShift2::VideoTest::Load(){
 
-    videoPlayer = new VideoPlayer("videotest.webm");
+    videoPlayer = new VideoPlayer("videotest.h264");
+    videoPlayer->loop = true;
 
     sprite1.texture = videoPlayer->texture;
 

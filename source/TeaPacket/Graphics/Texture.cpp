@@ -21,3 +21,14 @@ Texture* TeaPacket::Graphics::Texture::LoadFromFile(const char* path, TextureFil
     stbi_image_free(imageData);
     return tex;
 }
+
+unsigned int TeaPacket::Graphics::Texture::GetMemSizeOfTextureFormat(TextureFormat format,unsigned int width, unsigned int height){
+    switch(format){
+        case TEXTURE_FORMAT_RGBA8:
+            return width * height * 4;
+        case TEXTURE_FORMAT_NV12:
+            return (width * height * 3) >> 1;
+        default:
+        return -1;
+    }
+}

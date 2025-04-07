@@ -21,6 +21,8 @@ namespace {
         switch (format) {
         case TEXTURE_FORMAT_RGBA8:
             return GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
+        case TEXTURE_FORMAT_NV12:
+            return GX2_SURFACE_FORMAT_UNORM_NV12;
         }
         return GX2_SURFACE_FORMAT_INVALID;
     }
@@ -49,7 +51,7 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     texture->surface.height = height;
     texture->surface.depth = 1;
     texture->surface.mipLevels = 1;
-    texture->surface.format = GetGXFormatFromTPFormat(TEXTURE_FORMAT_RGBA8); // TODO: Formats
+    texture->surface.format = GetGXFormatFromTPFormat(format); // TODO: Formats
     texture->surface.aa = GX2_AA_MODE1X;
     texture->surface.use = GX2_SURFACE_USE_TEXTURE;
     texture->surface.dim = GX2_SURFACE_DIM_TEXTURE_2D;
@@ -65,10 +67,8 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     texture->surface.image = MEMAllocFromDefaultHeapEx(texture->surface.imageSize, texture->surface.alignment);
 
     if (!data) {
-        data = (unsigned char*)malloc(width * height * 4);
-        for(unsigned int i = 0; i < width * height; i++){
-            data[i*4+3] = 255;
-        }
+        data = (unsigned char*)malloc(GetMemSizeOfTextureFormat(format, width, height));
+        memset(data, 0, GetMemSizeOfTextureFormat(format, width, height));
     }
     size_t widthSizeInBytes = (sizeof(char) * 4 * width);
     for (unsigned int y = 0; y < height; y++) {

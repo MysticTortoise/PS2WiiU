@@ -30,12 +30,20 @@ stringargs = ""
 for arg in compileDefines:
     stringargs += "-D" + arg + " "
 
-os.system("cmake -S.  -Bbuild/" + args.platform + " "  + stringargs)
-os.system("cmake --build build/" + args.platform)
+commands = []
+
+commands.append("cmake -S.  -Bbuild/" + args.platform + " "  + stringargs)
+commands.append("cmake --build build/" + args.platform)
+
 
 if args.launch_after_compile :
     if args.platform == "windows":
-        subprocess.run("build\\windows\\CrossShift2.exe")
+        commands.append("build\\windows\\CrossShift2.exe")
     elif args.platform == "wiiu":
-        subprocess.run("D:\\Downloads\Cemu_2.0-36/Cemu.exe -g \"D:\\Programming\\PS2WiiU\\build\\wiiu\\CrossShift2.rpx\"")
+        commands.append("D:\\Downloads\Cemu_2.0-36/Cemu.exe -g \"D:\\Programming\\PS2WiiU\\build\\wiiu\\CrossShift2.rpx\"")
 #D:\Downloads\Cemu_2.0-36\Cemu.exe -g "C:\Users\Denis\OneDrive\Documents\WIIU\GFX2\wii-u-random-junk\hypergfx2test.rpx"
+
+with open("lastBuildCommand.sh", "w") as cmds:
+    for command in commands:
+        cmds.write(command + "\n")
+        os.system(command)
