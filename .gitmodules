@@ -1,6 +1,6 @@
-[submodule "libraries/windows/glfw"]
-	path = libraries/windows/glfw
+[submodule "libraries/Windows/glfw"]
+	path = libraries/Windows/glfw
 	url = https://github.com/glfw/glfw.git
-[submodule "libraries/common/glm"]
-	path = libraries/common/glm
+[submodule "libraries/Common/glm"]
+	path = libraries/Common/glm
 	url = https://github.com/g-truc/glm.git
