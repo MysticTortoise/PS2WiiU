@@ -132,10 +132,7 @@ TeaPacket::Graphics::VideoPlayer::VideoPlayer(const std::string path, Texture* t
 texture(texture),
 platformPlayer(new PlatformVideoPlayer(path))
 {
-    if(texture == nullptr){
-        this->texture = new Texture(NULL, platformPlayer->codecContext->width, platformPlayer->codecContext->height, TEXTURE_FORMAT_RGBA8);
-        textureOwnedBySelf = true;
-    }
+    this->texture = new Texture(NULL, platformPlayer->codecContext->width, platformPlayer->codecContext->height, TEXTURE_FORMAT_RGBA8);
 }
 
 void TeaPacket::Graphics::VideoPlayer::UpdateFrame(){
@@ -196,7 +193,7 @@ TeaPacket::Graphics::VideoPlayer::~VideoPlayer(){
     av_free(platformPlayer->customIOStream.internalBuffer);
     delete platformPlayer;
 
-    if(textureOwnedBySelf) { delete texture; }
+    delete texture;
 }
 
 void FFmpegPrint(void* ptr, int level, const char* text, va_list vl){

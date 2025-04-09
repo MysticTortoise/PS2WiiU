@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TeaPacket/Graphics/Texture.hpp"
+#include "TeaPacket/Graphics/Shader.hpp"
 
 #include <string>
 
@@ -20,12 +21,12 @@ namespace TeaPacket::Graphics{
         ~VideoPlayer();
 
         void UpdateFrame();
+        void PrepareToDraw();
         bool Tick();
 
-        private:
-        bool textureOwnedBySelf = false;
-
         public:
+        static Shader* customShader;
+
         static int Init();
         static void DeInit();
 

@@ -4,6 +4,7 @@
 
 #include "TeaPacket/Graphics/Texture.hpp"
 #include "wiiu/Graphics/PlatformTexture.hpp"
+#include "TeaPacket/Graphics/Shader.hpp"
 
 #include "TeaPacket/Files/Files.hpp"
 #include "TeaPacket/Files/FileStream.hpp"
@@ -11,6 +12,7 @@
 #include "TeaPacket/Time.hpp"
 
 #include <wut.h>
+#include <coreinit/memdefaultheap.h>
 #include <h264/decode.h>
 #include <h264/stream.h>
 
@@ -18,7 +20,13 @@
 #include <cstring>
 #include <cstdlib>
 
-static void frame_callback(H264DecodeOutput *output) { }
+#define H264_MEM_REQUIREMENT (0x2200000 + 0x3ff + 0x480000)
+#define H264_MEM_ALIGNMENT 0x400
+#define H264_FRAME_SIZE(w, h) (((w) * (h) * 3) >> 1)
+#define H264_FRAME_PITCH(w) (((w) + 0xff) & ~0xff)
+#define H264_FRAME_HEIGHT(h) (((h) + 0xf) & ~0xf)
+
+static void frame_callback(H264DecodeOutput *output) {}
 
 static const std::unordered_map<H264Error, const char*> H264ErrorCodes = {
     {H264_ERROR_OK, "H264 OK"},
@@ -31,6 +39,8 @@ static const std::unordered_map<H264Error, const char*> H264ErrorCodes = {
     {H264_ERROR_INVALID_PROFILE, "INVALID H264 PROFILE - MUST BE: 66, 77, 100"}
 };
 
+TeaPacket::Graphics::Shader* TeaPacket::Graphics::VideoPlayer::customShader = nullptr;
+
 
 TeaPacket::Graphics::VideoPlayer::VideoPlayer(const std::string path, Texture* texture):
 texture(texture)
@@ -40,9 +50,7 @@ texture(texture)
 
 
     size_t memRequirement = 0x2200000 + 0x3ff + 0x480000;
-    #ifndef VSCODE // SHUT UP VSCODE
-    platformPlayer->decoderMemory = std::aligned_alloc(0x400, memRequirement);
-    #endif
+    platformPlayer->decoderMemory = malloc(memRequirement);
 
     res = H264DECCheckMemSegmentation(platformPlayer->decoderMemory, memRequirement);
     if(res != 0){
@@ -96,27 +104,29 @@ texture(texture)
         return;
     }
 
+    PrintLine("MAKE BASE TEX");
+    unsigned char* texSpace = (unsigned char*)MEMAllocFromDefaultHeapEx(H264_FRAME_SIZE(H264_FRAME_PITCH(width),height), H264_MEM_ALIGNMENT);
+    PrintLine("GOOD ALLOC");
+    this->texture = new Texture(NULL, width, height, TEXTURE_FORMAT_R8);
+    PrintLine("MAKE UV TEX");
+    platformPlayer->uvTexture = new Texture(NULL, width/2, height/2, TEXTURE_FORMAT_RGBA8);
+    PrintLine("ALL TEXS MADE");
 
-    PrintLine("VIDEO DONE SETUP");
-    if(texture == nullptr){
-        this->texture = new Texture(NULL, width, height, TEXTURE_FORMAT_NV12);
-        textureOwnedBySelf = true;
-    }
+    MEMFreeToDefaultHeap(this->texture->platformTexture->gx2Tex->surface.image);
+    MEMFreeToDefaultHeap(platformPlayer->uvTexture->platformTexture->gx2Tex->surface.image);
+
+    this->texture->platformTexture->gx2Tex->surface.image = texSpace;
+    platformPlayer->uvTexture->platformTexture->gx2Tex->surface.image = texSpace + this->texture->platformTexture->gx2Tex->surface.imageSize;
 
 }
 
 void TeaPacket::Graphics::VideoPlayer::UpdateFrame(){
     int32_t skipable;
-    for(int i = 0; i < 16; i++){
-        TeaPacket::PrintLine(platformPlayer->h264Data[i]);
-    }
-    PrintLine("DEC EXEC");
     H264Error res = H264DECCheckSkipableFrame(platformPlayer->h264Data, platformPlayer->h264DataSize, &skipable);
     if(res != 0){
         PrintLine("ERROR: Error checking skipable frame. | Error Code " + std::string(H264ErrorCodes.at(res)));
         return;
     }
-    PrintLine("CHECKED SKIPPABLE FRAME");
     if(skipable){return;}
 
     res = H264DECSetBitstream(platformPlayer->decoderMemory, platformPlayer->h264Data, platformPlayer->h264DataSize, 0);
@@ -124,14 +134,11 @@ void TeaPacket::Graphics::VideoPlayer::UpdateFrame(){
         PrintLine("ERROR: Error setting bitstream | Error Code " + std::string(H264ErrorCodes.at(res)));
         return;
     }
-    PrintLine("BITSTREAM SET");
-    void* scratchpad = malloc(1024*9); // Just assigning a giant-ass block of memory until i ensure i can actually call this function without crashing
-    res = H264DECExecute(platformPlayer->decoderMemory, scratchpad); //texture->platformTexture->gx2Tex->surface.image);
-    if(res != 0){
+    res = H264DECExecute(platformPlayer->decoderMemory, texture->platformTexture->gx2Tex->surface.image);
+    if(res == 0){
         PrintLine("ERROR: Error decoding. | Error Code " + std::string(H264ErrorCodes.at(res)));
         return;
     }
-    PrintLine("DONE READING");
 }
 
 bool TeaPacket::Graphics::VideoPlayer::Tick(){
@@ -139,14 +146,19 @@ bool TeaPacket::Graphics::VideoPlayer::Tick(){
     return true;
 }
 
+void TeaPacket::Graphics::VideoPlayer::PrepareToDraw(){
+    customShader->Use();
+    customShader->SetTexture(platformPlayer->uvTexture, 1);
+}
+
 TeaPacket::Graphics::VideoPlayer::~VideoPlayer(){
 
+    delete platformPlayer->uvTexture;
     delete platformPlayer;
-
-    if(textureOwnedBySelf) { delete texture; }
+    delete texture;
 }
 int TeaPacket::Graphics::VideoPlayer::Init(){
-
+    customShader = new Shader("shaders/sprite.vert", "shaders/nv12sprite.frag");
     return 1;
 }
 #endif

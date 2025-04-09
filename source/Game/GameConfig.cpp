@@ -3,6 +3,7 @@
 
 #include "TeaPacket/Scene/SceneScript.hpp"
 
+#include "Game/Scenes/TestScene.hpp"
 #include "Game/Scenes/VideoTest.hpp"
 
 using namespace TeaPacket;

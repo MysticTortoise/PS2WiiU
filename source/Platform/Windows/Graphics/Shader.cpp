@@ -2,6 +2,8 @@
 #include "TeaPacket/Graphics/Shader.hpp"
 #include "Windows/Graphics/PlatformShader.hpp"
 
+#include "Windows/Graphics/PlatformTexture.hpp"
+
 #include "TeaPacket/Files/Files.hpp"
 
 #include "glad/glad.h"
@@ -60,6 +62,15 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
 
     platformShader = new PlatformShader();
     platformShader->handle = program;
+}
+
+void TeaPacket::Graphics::Shader::Use(){
+    glUseProgram(platformShader->handle);
+}
+
+void TeaPacket::Graphics::Shader::SetTexture(Texture* tex, int slot){
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, tex->platformTexture->handle);
 }
 
 TeaPacket::Graphics::Shader::~Shader(){

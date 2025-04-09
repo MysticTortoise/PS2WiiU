@@ -12,9 +12,9 @@ using namespace TeaPacket;
 
 int TeaPacket::Initialize(){
     if(TeaPacket::       LogInit() < 0) { return -1; }
+    if(TeaPacket::Files   ::Init() < 0) { return -1; }
     if(TeaPacket::Graphics::Init() < 0) { return -1; }
     if(TeaPacket::Graphics::VideoPlayer::Init() < 0) { return -1; }
-    if(TeaPacket::Files   ::Init() < 0) { return -1; }
 
     if(TeaPacket::Graphics::Sprite::Init() < 0) { return -1; }
 

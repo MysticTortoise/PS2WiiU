@@ -97,8 +97,15 @@ void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
-    glBindTexture(GL_TEXTURE_2D, texture->platformTexture->handle);
-    glUseProgram(Sprite::spriteShader->platformShader->handle);
+    Shader* usedShader;
+    if(customShader == nullptr){
+        usedShader = spriteShader;
+    } else{
+        usedShader = customShader;
+    }
+    usedShader->Use();
+    usedShader->SetTexture(texture, 0);
+    
 
     glm::mat4 objectMat(1.0f);
     glm::vec3 anchorOffset(anchor.x, -anchor.y, 0);

@@ -11,6 +11,8 @@ namespace TeaPacket::Graphics{
         void* decoderMemory;
         uint8_t* h264Data;
         size_t h264DataSize;
+
+        Texture* uvTexture;
     };
 }
 #endif

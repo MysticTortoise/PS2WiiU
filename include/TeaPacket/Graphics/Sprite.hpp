@@ -20,6 +20,7 @@ namespace TeaPacket::Graphics
 
         
         Texture* texture;
+        Shader* customShader = nullptr;
 
         Sprite(Texture* texture = nullptr);
         void Draw();

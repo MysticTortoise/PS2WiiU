@@ -21,10 +21,24 @@ namespace {
         switch (format) {
         case TEXTURE_FORMAT_RGBA8:
             return GX2_SURFACE_FORMAT_UNORM_R8_G8_B8_A8;
-        case TEXTURE_FORMAT_NV12:
-            return GX2_SURFACE_FORMAT_UNORM_NV12;
+        case TEXTURE_FORMAT_R8:
+            return GX2_SURFACE_FORMAT_UNORM_R8;
+        case TEXTURE_FORMAT_RG8:
+            return GX2_SURFACE_FORMAT_UNORM_R8_G8;
         }
         return GX2_SURFACE_FORMAT_INVALID;
+    }
+
+    static int GetChannelCountFromTPFormat(TextureFormat format) {
+        switch (format) {
+        case TEXTURE_FORMAT_RGBA8:
+            return 4;
+        case TEXTURE_FORMAT_R8:
+            return 1;
+        case TEXTURE_FORMAT_RG8:
+            return 2;
+        }
+        return -1;
     }
 
     static GX2TexXYFilterMode GetGXFilterFromTPFormat(TextureFilterType filter) {
@@ -45,8 +59,11 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     filterType(filterType),
     format(format)
 {
-    GX2Texture* texture = new GX2Texture();
-
+    PrintLine("MAKE GX2TEX");
+    GX2Texture tex;
+    GX2Texture* texture = &tex;
+    PrintLine(texture == nullptr);
+    PrintLine("A!!!");
     texture->surface.width = width;
     texture->surface.height = height;
     texture->surface.depth = 1;
@@ -64,13 +81,19 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     texture->compMap = 0x0010203;
     GX2CalcSurfaceSizeAndAlignment(&texture->surface);
     GX2InitTextureRegs(texture);
+    PrintLine("SETUP DONE");
     texture->surface.image = MEMAllocFromDefaultHeapEx(texture->surface.imageSize, texture->surface.alignment);
+
+    if(texture->surface.image == nullptr){
+        PrintLine("OOM! FUCK!!!");
+    }
+    
 
     if (!data) {
         data = (unsigned char*)malloc(GetMemSizeOfTextureFormat(format, width, height));
         memset(data, 0, GetMemSizeOfTextureFormat(format, width, height));
     }
-    size_t widthSizeInBytes = (sizeof(char) * 4 * width);
+    size_t widthSizeInBytes = (sizeof(char) * GetChannelCountFromTPFormat(format) * width);
     for (unsigned int y = 0; y < height; y++) {
         size_t offset = y * texture->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)texture->surface.image + offset;

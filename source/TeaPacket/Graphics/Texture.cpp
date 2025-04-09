@@ -26,8 +26,10 @@ unsigned int TeaPacket::Graphics::Texture::GetMemSizeOfTextureFormat(TextureForm
     switch(format){
         case TEXTURE_FORMAT_RGBA8:
             return width * height * 4;
-        case TEXTURE_FORMAT_NV12:
-            return (width * height * 3) >> 1;
+        case TEXTURE_FORMAT_R8:
+            return width * height;
+        case TEXTURE_FORMAT_RG8:
+            return width * height * 2;
         default:
         return -1;
     }

@@ -12,7 +12,8 @@ namespace TeaPacket::Graphics
 
     enum TextureFormat{
         TEXTURE_FORMAT_RGBA8,
-        TEXTURE_FORMAT_NV12
+        TEXTURE_FORMAT_R8,
+        TEXTURE_FORMAT_RG8,
     };    
 
     class PlatformTexture;
@@ -28,7 +29,9 @@ namespace TeaPacket::Graphics
         TextureFormat format = TEXTURE_FORMAT_RGBA8;
         public:
 
-        Texture(unsigned char* data, unsigned int width, unsigned int height, TextureFormat = TEXTURE_FORMAT_RGBA8, TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
+        Texture(unsigned char* data, unsigned int width, unsigned int height, 
+            TextureFormat = TEXTURE_FORMAT_RGBA8, 
+            TextureFilterType filterType = TEXTURE_FILTER_LINEAR);
         ~Texture();
 
         // Update the contents of a Texture. MUST be the same width, height, and format.

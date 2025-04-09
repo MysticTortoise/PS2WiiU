@@ -139,11 +139,14 @@ void TeaPacket::Graphics::Sprite::BeginRenderFromCamera(Camera* camera){
 }
 
 void TeaPacket::Graphics::Sprite::Draw(){
-        
-    GX2SetFetchShader(&(spriteShader->platformShader->whbGroup->fetchShader));
-    GX2SetVertexShader(spriteShader->platformShader->whbGroup->vertexShader);
-    GX2SetPixelShader(spriteShader->platformShader->whbGroup->pixelShader);
-    GX2SetShaderMode(GX2_SHADER_MODE_UNIFORM_BLOCK);
+    Shader* usedShader;
+    if(customShader == nullptr){
+        usedShader = spriteShader;
+    } else{
+        usedShader = customShader;
+    }
+    usedShader->Use();
+    usedShader->SetTexture(texture, 0);
 
     glm::mat4 objectMat(1.0f);
     glm::vec3 anchorOffset(anchor.x, -anchor.y, 0); 
@@ -170,8 +173,7 @@ void TeaPacket::Graphics::Sprite::Draw(){
     GX2SetVertexUniformBlock(0, sizeof(objectUniformBlock), (void*)objectUniformBlock);
     GX2Invalidate((GX2InvalidateMode)(GX2_INVALIDATE_MODE_CPU | GX2_INVALIDATE_MODE_UNIFORM_BLOCK), objectUniformBlock, sizeof(objectUniformBlock));
 
-    GX2SetPixelTexture(texture->platformTexture->gx2Tex, spriteShader->platformShader->whbGroup->pixelShader->samplerVars[0].location);
-    GX2SetPixelSampler(texture->platformTexture->gx2Sampler, spriteShader->platformShader->whbGroup->pixelShader->samplerVars[0].location);
+
 
     GX2DrawEx(GX2_PRIMITIVE_MODE_TRIANGLES, 6, 0, 1);
 }   
