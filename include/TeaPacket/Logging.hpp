@@ -1,9 +1,6 @@
 #pragma once
 
 #include <string>
-#ifndef TP_DEBUG
-#define Print(V)
-#endif
 
 namespace TeaPacket{
     void PrintString(std::string val);

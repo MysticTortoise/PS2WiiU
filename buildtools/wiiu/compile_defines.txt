@@ -1,0 +1,6 @@
+PLATFORM=wiiu
+CMAKE_TOOLCHAIN_FILE=/opt/devkitPro/cmake/WiiU.cmake
+CMAKE_BUILD_TYPE=Release
+CMAKE_C_COMPILER=/opt/devkitPro/devkitPPC/bin/powerpc-eabi-gcc.exe
+CMAKE_CXX_COMPILER=/opt/devkitPro/devkitPPC/bin/powerpc-eabi-g++.exe
+DEBUG=true

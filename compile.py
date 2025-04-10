@@ -11,31 +11,25 @@ parser.add_argument("--twoscreen", help="Enables dual screen mode. Only works on
 parser.add_argument("--launch_after_compile", help="Launches the game after compiling", action="store_true")
 args = parser.parse_args()
 
-
 compileDefines = []
 
-if args.platform == "windows":
-    compileDefines.append("PLATFORM_WINDOWS=true")
-    compileDefines.append("CMAKE_BUILD_TYPE=Release")
-    compileDefines.append("DEBUG=true")
-elif args.platform == "wiiu":
-    compileDefines.append("PLATFORM_WIIU=true")
-    compileDefines.append("CMAKE_TOOLCHAIN_FILE=/opt/devkitPro/cmake/WiiU.cmake")
-    compileDefines.append("CMAKE_BUILD_TYPE=Release")
-    compileDefines.append("CMAKE_C_COMPILER=/opt/devkitPro/devkitPPC/bin/powerpc-eabi-gcc.exe")
-    compileDefines.append("CMAKE_CXX_COMPILER=/opt/devkitPro/devkitPPC/bin/powerpc-eabi-g++.exe")
-    compileDefines.append("DEBUG=true")
+with open("buildtools/" + args.platform + "/compile_defines.txt", "r") as compileDefinesFile:
+    for line in compileDefinesFile:
+        compileDefines.append(line.replace("\n",""))
 
 stringargs = ""
 for arg in compileDefines:
     stringargs += "-D" + arg + " "
 
-os.system("cmake -S.  -Bbuild/" + args.platform + " "  + stringargs)
-os.system("cmake --build build/" + args.platform)
+commands = []
+
+commands.append("cmake -S.  -Bbuild/" + args.platform + " "  + stringargs)
+commands.append("cmake --build build/" + args.platform)
 
 if args.launch_after_compile :
-    if args.platform == "windows":
-        subprocess.run("build\\windows\\CrossShift2.exe")
-    elif args.platform == "wiiu":
-        subprocess.run("D:\\Downloads\Cemu_2.0-36/Cemu.exe -g \"D:\\Programming\\PS2WiiU\\build\\wiiu\\CrossShift2.rpx\"")
-#D:\Downloads\Cemu_2.0-36\Cemu.exe -g "C:\Users\Denis\OneDrive\Documents\WIIU\GFX2\wii-u-random-junk\hypergfx2test.rpx"
+    commands.append(open("buildtools/" + args.platform + "/launch_after_compile.txt", "r").readline())
+
+with open("lastBuildCommand.sh", "w") as cmds:
+    for command in commands:
+        cmds.write(command + "\n")
+        os.system(command)
