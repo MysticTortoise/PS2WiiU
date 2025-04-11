@@ -32,4 +32,4 @@
 *.app
 
 build/
-openmsys.bat
+lastBuildCommand.sh
