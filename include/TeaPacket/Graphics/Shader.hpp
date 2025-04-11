@@ -1,5 +1,7 @@
 #pragma once
 
+
+#include <string>
 namespace TeaPacket::Graphics{
     class PlatformShader;
     class Shader{
@@ -8,5 +10,7 @@ namespace TeaPacket::Graphics{
 
         Shader(const char* vertexShaderPath, const char* fragmentShaderPath);
         ~Shader();
+        public:
+        static std::string& ParseShaderText(std::string& text);
     };
 }

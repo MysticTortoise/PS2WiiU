@@ -21,7 +21,7 @@ void PostShift2::TestScene::Load(){
 
     sprite1.scale = Math::Vector2(4,4);
 
-    camera.bgColor = Math::Vector4(1,0,0);
+    camera.bgColor = Math::Vector4(0,0,0);
     sprite2.color.w = 0.5f;
 }
 

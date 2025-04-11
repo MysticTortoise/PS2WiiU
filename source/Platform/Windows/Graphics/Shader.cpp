@@ -14,6 +14,7 @@ using namespace TeaPacket;
 
 TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fragmentShaderPath){
     std::string vertexShaderString = Files::ReadTextFile(vertexShaderPath);
+    ParseShaderText(vertexShaderString);
     const char* vertexShaderCode = vertexShaderString.c_str();
 
     unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -30,6 +31,7 @@ TeaPacket::Graphics::Shader::Shader(const char* vertexShaderPath, const char* fr
     }
     #endif
     std::string fragmentShaderString = Files::ReadTextFile(fragmentShaderPath);
+    ParseShaderText(fragmentShaderString);
     const char* fragmentShaderCode = fragmentShaderString.c_str();
 
     unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
