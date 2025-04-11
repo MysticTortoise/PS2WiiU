@@ -6,7 +6,7 @@
 #include <whb/proc.h>
 
 void TeaPacket::PrintString(std::string val) {
-    OSReport((val + "\n").c_str());
+    OSReport(val.c_str());
 }
 
 int TeaPacket::LogInit(){

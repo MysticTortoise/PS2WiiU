@@ -1,6 +1,10 @@
 #pragma once
 
 #include <string>
+#ifndef TP_DEBUG
+#define Print(V)
+#define PrintLine(V)
+#endif
 
 namespace TeaPacket{
     void PrintString(std::string val);
@@ -21,7 +25,12 @@ namespace TeaPacket{
         PrintString(std::string(val));
     }
 
+    template<typename T>
+    inline void PrintLine(T val){
+        Print(val);
+        Print("\n");
+    }
+
     int LogInit();
     void LogDeInit();
 }
-

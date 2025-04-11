@@ -4,7 +4,7 @@
 #include <iostream>
 
 void TeaPacket::PrintString(std::string val) {
-    std::cout << val << std::endl;
+    std::cout << val;
 }
 
 int TeaPacket::LogInit()  {return 1;}
