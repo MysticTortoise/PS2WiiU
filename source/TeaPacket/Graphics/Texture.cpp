@@ -6,16 +6,22 @@
 
 using TeaPacket::Graphics::Texture;
 
-Texture* TeaPacket::Graphics::Texture::LoadFromFile(const char* path, TextureFilterType filterType){
+Texture* TeaPacket::Graphics::Texture::LoadFromFile(const char* path, const TextureParameters& parameters){
     std::vector<char> data = TeaPacket::Files::ReadBinaryFile(path);
 
     int width, height, channelCount;
 
     unsigned char* imageData = stbi_load_from_memory((unsigned char*)data.data(), data.size(), &width, &height, &channelCount, STBI_rgb_alpha);
 
-    Texture* tex = new Texture(imageData, width, height, TEXTURE_FORMAT_RGBA8, filterType);
-    tex->width = width;
-    tex->height = height;
+    TextureParameters params = TextureParameters(parameters);
+    params.width = width;
+    params.height = height;
+    params.format = TEXTURE_FORMAT_RGBA8;
+    params.data = imageData;
+
+    Texture* tex = new Texture(params);
+    tex->parameters.width = width;
+    tex->parameters.height = height;
 
     // Delete no longer necessary data
     stbi_image_free(imageData);

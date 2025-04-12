@@ -147,7 +147,7 @@ void TeaPacket::Graphics::Sprite::Draw(){
 
     glm::mat4 objectMat(1.0f);
     glm::vec3 anchorOffset(anchor.x, -anchor.y, 0); 
-    glm::vec3 pixelSize(texture->width, texture->height, 0);
+    glm::vec3 pixelSize(texture->parameters.width, texture->parameters.height, 0);
 
     objectMat = glm::translate(objectMat, ((glm::vec3)position) + anchorOffset * pixelSize);
     objectMat = glm::scale(objectMat,pixelSize);

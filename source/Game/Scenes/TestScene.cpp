@@ -4,9 +4,12 @@
 
 #include <cmath>
 using namespace TeaPacket;
+using namespace TeaPacket::Graphics;
 
 void PostShift2::TestScene::Load(){
-    testTex1 = Graphics::Texture::LoadFromFile("test.png", TeaPacket::Graphics::TEXTURE_FILTER_POINT);
+    TextureParameters testParams = TextureParameters();
+    testParams.filterType = TEXTURE_FILTER_POINT;
+    testTex1 = Graphics::Texture::LoadFromFile("test.png",testParams);
     testTex2 = Graphics::Texture::LoadFromFile("test2.png");
 
     sprite1.texture = testTex1;

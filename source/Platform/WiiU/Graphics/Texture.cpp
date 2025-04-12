@@ -36,17 +36,14 @@ namespace {
     }
 }
 
-TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, unsigned int height, TextureFormat format, TextureFilterType filterType) :
-    width(width),
-    height(height),
-    platformTexture(new PlatformTexture()),
-    filterType(filterType),
-    format(format)
+TeaPacket::Graphics::Texture::Texture(const TextureParameters& parameters) :
+    parameters(parameters),
+    platformTexture(new PlatformTexture())
 {
     GX2Texture* texture = new GX2Texture();
 
-    texture->surface.width = width;
-    texture->surface.height = height;
+    texture->surface.width = parameters.width;
+    texture->surface.height = parameters.height;
     texture->surface.depth = 1;
     texture->surface.mipLevels = 1;
     texture->surface.format = GetGXFormatFromTPFormat(TEXTURE_FORMAT_RGBA8); // TODO: Formats
@@ -64,15 +61,15 @@ TeaPacket::Graphics::Texture::Texture(unsigned char* data, unsigned int width, u
     GX2InitTextureRegs(texture);
     texture->surface.image = MEMAllocFromDefaultHeapEx(texture->surface.imageSize, texture->surface.alignment);
 
-    size_t widthSizeInBytes = (sizeof(char) * 4 * width);
-    for (unsigned int y = 0; y < height; y++) {
+    size_t widthSizeInBytes = (sizeof(char) * 4 * parameters.width);
+    for (unsigned int y = 0; y < parameters.height; y++) {
         size_t offset = y * texture->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)texture->surface.image + offset;
-        memcpy(firstPixel, (data + widthSizeInBytes * y), widthSizeInBytes);
+        memcpy(firstPixel, ((unsigned char*)(parameters.data) + widthSizeInBytes * y), widthSizeInBytes);
     }
 
     GX2Sampler* sampler = new GX2Sampler();
-    GX2InitSampler(sampler, GX2_TEX_CLAMP_MODE_CLAMP, GetGXFilterFromTPFormat(filterType));
+    GX2InitSampler(sampler, GX2_TEX_CLAMP_MODE_CLAMP, GetGXFilterFromTPFormat(parameters.filterType));
 
     platformTexture->gx2Tex = texture;
     platformTexture->gx2Sampler = sampler;
@@ -84,8 +81,8 @@ TeaPacket::Graphics::Texture::~Texture() {
 }
 
 bool TeaPacket::Graphics::Texture::UpdateContents(unsigned char* data){
-    size_t widthSizeInBytes = (sizeof(char) * 4 * width);
-    for (unsigned int y = 0; y < height; y++) {
+    size_t widthSizeInBytes = (sizeof(char) * 4 * parameters.width);
+    for (unsigned int y = 0; y < parameters.height; y++) {
         size_t offset = y * platformTexture->gx2Tex->surface.pitch;
         uint32_t* firstPixel = (uint32_t*)platformTexture->gx2Tex->surface.image + offset;
         memcpy(firstPixel, (data + widthSizeInBytes * y), widthSizeInBytes);
