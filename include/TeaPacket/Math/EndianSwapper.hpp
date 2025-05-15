@@ -2,51 +2,56 @@
 
 #include <stdint.h>
 #include <algorithm>
+#include <cstring>
 
-template <typename T, std::size_t S>
-struct helper {};
+// by mch, https://stackoverflow.com/questions/59346207/24-bit-to-32-bit-conversion-in-c
+int32_t inline constexpr interpret24bitAsInt32(char* byteArray)
+{     
+    int32_t number =
+        (((int32_t)byteArray[0]) << 16)
+    |   (((int32_t)byteArray[1]) << 8)
+    |   byteArray[2];
+    if (number >= ((int32_t)1) << 23)
+        return number - 16777216;
+    return number;
+}
 
-template <typename T>
-struct helper<T, 1> {
-    using type = uint8_t;
-};
-template <typename T>
-struct helper<T, 2> {
-    using type = uint16_t;
-};
-template <typename T>
-struct helper<T, 4> {
-    using type = uint32_t;
-};
-template <typename T>
-struct helper<T, 8> {
-    using type = uint64_t;
-};
-
-template <typename T>
-using int_type = typename helper<T, sizeof(T)>::type;
-
-uint16_t inline _swapU16(uint16_t v) {
+uint16_t inline constexpr _swapU16(uint16_t v) {
     return (v>>8) | (v<<8);
 }
 
-int16_t inline _swapS16(int16_t v) {
+int16_t inline constexpr _swapS16(int16_t v) {
     return (v>>8) | (v<<8);
 }
 
-uint32_t inline _swapU32(uint32_t v) {
+uint32_t inline constexpr _swapU32(uint32_t v) {
     return ((v>>24)&0xff) | ((v<<8)&0xff0000) | ((v>>8)&0xff00) | ((v<<24)&0xff000000);
 }
 
-int32_t inline _swapS32(int32_t v) {
+int32_t inline constexpr _swapS32(int32_t v) {
     return ((v>>24)&0xff) | ((v<<8)&0xff0000) | ((v>>8)&0xff00) | ((v<<24)&0xff000000);
 }
 
-uint32_t inline _swapF32(const float v)
+uint64_t inline constexpr _swapU64(uint64_t v) {
+    return _swapS32(v&0xFFFFFFFF) | _swapS32((v>>32)&0xFFFFFFFF);
+}
+
+int64_t inline constexpr _swapS64(int64_t v) {
+    return _swapS32(v&0xFFFFFFFF) | _swapS32((v>>32)&0xFFFFFFFF);
+}
+
+uint32_t inline constexpr _swapF32(const float v)
 {
-    return __builtin_bswap32(*(uint32_t*)&v);
+    uint32_t r = 0;
+    memcpy(&r,&v,sizeof(float));
+    return _swapS32(r);
 }
 
-float ReverseFloat( const float inFloat );
-
-uint32_t FloatToUINTBitcas(const float v);
+bool inline constexpr is_big_endian(void)
+{
+    union {
+        uint32_t i;
+        char c[4];
+    } val = {0x01020304};
+    return val.c[0] == 1;
+}
