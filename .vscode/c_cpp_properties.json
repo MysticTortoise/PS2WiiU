@@ -9,10 +9,12 @@
                 "${workspaceFolder}/include",
                 "${workspaceFolder}/include/Platform",
 
-                "${workspaceFolder}/libraries/common/glm",
+                "${workspaceFolder}/libraries/Common/glm",
+                "${workspaceFolder}/libraries/Common/fpm/include",
                 
                 "${workspaceFolder}/libraries/windows/glfw/include",
                 "${workspaceFolder}/libraries/windows/glad/include",
+                "${workspaceFolder}/build/libraries/Windows/ffmpeg/include",
 
                 "${workspaceFolder}/libraries/wiiu"
             ],
@@ -22,7 +24,8 @@
                 "_UNICODE",
                 "TP_WIN",
                 "TP_WIIU",
-                "TP_DEBUG"
+                "TP_DEBUG",
+                "VSCODE"
             ],
             "windowsSdkVersion": "10.0.22000.0",
             "compilerPath": "cl.exe",

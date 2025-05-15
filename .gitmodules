@@ -7,3 +7,6 @@
 [submodule "libraries/Windows/ffmpeg"]
 	path = libraries/Windows/ffmpeg
 	url = https://github.com/FFmpeg/FFmpeg.git
+[submodule "libraries/Common/fpm"]
+	path = libraries/Common/fpm
+	url = https://github.com/MikeLankamp/fpm.git
