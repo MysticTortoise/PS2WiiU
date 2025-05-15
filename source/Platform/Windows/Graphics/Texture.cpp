@@ -58,6 +58,7 @@ TeaPacket::Graphics::Texture::Texture(const TextureParameters& parameters) :
     parameters(parameters),
     platformTexture(new PlatformTexture())
 {
+    void* data = parameters.unsafeParameters.overrideData == nullptr ? parameters.data : parameters.unsafeParameters.overrideData;
     // Generate Texture
     unsigned int handle;
     glGenTextures(1, &handle);
@@ -70,7 +71,7 @@ TeaPacket::Graphics::Texture::Texture(const TextureParameters& parameters) :
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, filter.magFilter);
     // TODO: Format
     GLFormat glFormat = GetGLFormatFromTPFormat(parameters.format);
-    glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, parameters.width, parameters.height, 0, glFormat.channelType, glFormat.bitDepth, parameters.data);
+    glTexImage2D(GL_TEXTURE_2D, 0, glFormat.channelType, parameters.width, parameters.height, 0, glFormat.channelType, glFormat.bitDepth, data);
     glGenerateMipmap(GL_TEXTURE_2D);
     // Delete no longer necessary data
     // Setup platformTexture
