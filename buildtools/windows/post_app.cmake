@@ -1,1 +1,0 @@
-target_link_libraries(CrossShift2 glfw glm)
