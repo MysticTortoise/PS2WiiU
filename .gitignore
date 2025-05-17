@@ -34,3 +34,5 @@
 build/
 lastBuildCommand.sh
 log.txt
+
+__pycache__
